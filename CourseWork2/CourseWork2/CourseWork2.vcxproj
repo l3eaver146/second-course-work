@@ -123,6 +123,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="airplane.h" />
+    <ClInclude Include="header.h" />
+    <ClInclude Include="order.h" />
+    <ClInclude Include="place.h" />
+    <ClInclude Include="route.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="airplane.cpp" />
+    <ClCompile Include="order.cpp" />
+    <ClCompile Include="place.cpp" />
+    <ClCompile Include="route.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
