@@ -1,77 +1,119 @@
-#pragma once
-#include<iostream>
-#include<string>
-#include<ctime>
-#include <iomanip>
+#ifndef STACK_H
+#define STACK_H
+#include <iostream>
+#include <cassert> // для assert
+#include <iomanip> // для setw
 
 using namespace std;
-
 
 template <typename T>
 class Stack
 {
 private:
-	T* stackPtr; // указатель на стек
-	int size; // размер стека
-	T top; // вершина стека
+	T* stackPtr;                      // указатель на стек
+	const int size;                   // максимальное количество элементов в стеке
+	int top;                          // номер текущего элемента стека
 public:
-	Stack(int = 10);// по умолчанию размер стека равен 10 элементам
-	~Stack(); // деструктор
-	bool push(const T); // поместить элемент в стек
-	bool pop(); // удалить из стека элемент
-	void printStack();
+	Stack(int = 10);                  // по умолчанию размер стека равен 10 элементам
+	Stack(const Stack<T>&);          // конструктор копирования
+	~Stack();                         // деструктор
+
+	inline void push(const T&);     // поместить элемент в вершину стека
+	inline T pop();                   // удалить элемент из вершины стека и вернуть его
+	inline void printStack();         // вывод стека на экран
+	inline const T& Peek(int) const; // n-й элемент от вершины стека
+	inline int getStackSize() const;  // получить размер стека
+	inline T* getPtr() const;         // получить указатель на стек
+	inline int getTop() const;        // получить номер текущего элемента в стеке
 };
 
-// конструктор
+// реализация методов шаблона класса STack
+
+// конструктор Стека
 template <typename T>
-Stack<T>::Stack(int s)
+Stack<T>::Stack(int maxSize) :
+	size(maxSize) // инициализация константы
 {
-	size = s > 0 ? s : 10;   // инициализировать размер стека
 	stackPtr = new T[size]; // выделить память под стек
-	top = -1; // значение -1 говорит о том, что стек пуст
+	top = 0; // инициализируем текущий элемент нулем;
 }
 
-// деструктор
+// конструктор копирования
+template <typename T>
+Stack<T>::Stack(const Stack<T>& otherStack) :
+	size(otherStack.getStackSize()) // инициализация константы
+{
+	stackPtr = new T[size]; // выделить память под новый стек
+	top = otherStack.getTop();
+
+	for (int ix = 0; ix < top; ix++)
+		stackPtr[ix] = otherStack.getPtr()[ix];
+}
+
+// функция деструктора Стека
 template <typename T>
 Stack<T>::~Stack()
 {
 	delete[] stackPtr; // удаляем стек
 }
 
-// элемент функция класса  Stack для помещения элемента в стек
-// возвращаемое значение - true, операция успешно завершена
-//                                    false, элемент в стек не добавлен
+// функция добавления элемента в стек
 template <typename T>
-bool Stack<T>::push(const T value)
+inline void Stack<T>::push(const T& value)
 {
-	if (top == size - 1)
-		return false; // стек полон
+	// проверяем размер стека
+	assert(top < size); // номер текущего элемента должен быть меньше размера стека
 
-	top++;
-	stackPtr[top] = value; // помещаем элемент в стек
-
-	return true; // успешное выполнение операции
+	stackPtr[top++] = value; // помещаем элемент в стек
 }
 
-// элемент функция класса  Stack для удаления элемента из стек
-// возвращаемое значение - true, операция успешно завершена
-//                                    false, стек пуст
+// функция удаления элемента из стека
 template <typename T>
-bool Stack<T>::pop()
+inline T Stack<T>::pop()
 {
-	if (top == -1)
-		return false; // стек пуст
+	// проверяем размер стека
+	assert(top > 0); // номер текущего элемента должен быть больше 0
 
-	stackPtr[top] = 0; // удаляем элемент из стека
-	top--;
+	stackPtr[--top]; // удаляем элемент из стека
+}
 
-	return true; // успешное выполнение операции
+// функция возвращает n-й элемент от вершины стека
+template <class T>
+inline const T& Stack<T>::Peek(int nom) const
+{
+	//
+	assert(nom <= top);
+
+	return stackPtr[top - nom]; // вернуть n-й элемент стека
 }
 
 // вывод стека на экран
 template <typename T>
-void Stack<T>::printStack()
+inline void Stack<T>::printStack()
 {
-	for (int ix = size - 1; ix >= 0; ix--)
+	for (int ix = top - 1; ix >= 0; ix--)
 		cout << "|" << setw(4) << stackPtr[ix] << endl;
 }
+
+// вернуть размер стека
+template <typename T>
+inline int Stack<T>::getStackSize() const
+{
+	return size;
+}
+
+// вернуть указатель на стек (для конструктора копирования)
+template <typename T>
+inline T* Stack<T>::getPtr() const
+{
+	return stackPtr;
+}
+
+// вернуть размер стека
+template <typename T>
+inline int Stack<T>::getTop() const
+{
+	return top;
+}
+
+#endif // STACK_H
