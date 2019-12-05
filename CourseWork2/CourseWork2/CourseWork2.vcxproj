@@ -124,6 +124,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Airplane.h" />
+    <ClInclude Include="Authorization.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Order.h" />

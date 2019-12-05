@@ -29,10 +29,12 @@ public:
 	void show_users(); //метод, выводящий все элемента списка с начала
 	void showBack(); //метод, выводящий все элемента списка с конца
 	Line<T>* operator [] (int); //перегрузка оператора []
-	void readFile(string);  //чтение данных из файла
+	void readFileusers(string);  //чтение данных из файла
 	void writeFile(string); //запись данных в файл
 	bool isEmpty(); //метод, проверяющий список на пустоту    
 	bool check_user_data(string, string);
+	bool check_on_copy(string);
+	void writeEndFileusers(string filename,Users obj);
 	~List(); //деструктор без параметров
 };
 
@@ -226,10 +228,47 @@ bool List<T>::isEmpty()
 }
 
 template<class T>
-inline bool List<T>::check_user_data(string, string)
+inline bool List<T>::check_user_data(string login, string password)
 {
-	return false;
+	int steps=0;
+	bool res = false;
+	Line<T>* current = nullptr;
+	current = begin;
+	while (current != NULL) {
+		if ((current->obj.Users::get_login() == login) && (current->obj.Users::get_password() == password)) {
+			res=true;
+			break;
+		}
+		current = current->next;
+	}
+	return res;
 }
+
+template<class T>
+inline bool List<T>::check_on_copy(string login)
+{
+	bool res=true;
+	Line <T>* current=begin;
+	while (current != NULL) {
+		if (current->obj.Users::get_login() == login) {
+			res = false;
+			break;
+		}
+		else {
+			current = current->next;
+			res = true;
+		}
+	}
+	return res;
+}
+
+template<class T>
+inline void List<T>::writeEndFileusers(string filename,Users obj)
+{
+	fstream add(filename, ios::app);
+	add << obj.get_login() << " " << obj.get_password() << " "<<obj.get_root()<<endl;
+	add.close();
+} 
 
 template<class T>
 Line<T>* List<T>::operator[] (int id)
@@ -248,12 +287,16 @@ Line<T>* List<T>::operator[] (int id)
 	return current;
 }
 template<class T>
-void List<T>::readFile(string fileName)
+void List<T>::readFileusers(string fileName)
 {
-	ifstream fin(fileName, ios::binary | ios::in);
+	ifstream fin(fileName,ios::in);
 	T temp;
-	while (fin >> temp)
-	{
+	string login, password, root;
+	while (!fin.eof()) {
+		fin >> login >> password >> root;
+		temp.Users::set_login(login);
+		temp.Users::set_password(password);
+		temp.Users::set_root(root);
 		this->push(temp);
 	}
 	fin.close();
@@ -261,12 +304,16 @@ void List<T>::readFile(string fileName)
 template<class T>
 void List<T>::writeFile(string fileName)
 {
-	ofstream fout(fileName, ios::binary | ios_base::out);
-	Line<T>* current = begin;
+	ofstream fout(fileName, ios::out);
+	Line<T>* current = nullptr;
+	current=end;
 	while (current != NULL)
 	{
-		fout << current->obj;
-		current = current->next;
+		fout << current->obj.Users::get_login()<<" "<<
+		current->obj.Users::get_password()<<" "<<
+		current->obj.Users::get_root()<<
+		endl;
+		current = current->prev;
 	}
 	fout.close();
 }
