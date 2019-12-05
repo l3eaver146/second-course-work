@@ -1,7 +1,9 @@
 #pragma once
-#include "header.h"
-#include"airplane.h"
-class route:public virtual airplane
+
+#include "Header.h"
+#include"Airplane.h"
+
+class Route :public virtual Airplane
 {
 protected:
 	int lenght;
@@ -10,8 +12,8 @@ protected:
 	string date_of_shipping;
 	string date_of_arrival;
 public:
-	route() {}
-	route(int lenght, int time, string status, string date_of_shipping, string date_of_arrival, int number_places, string name, string speed, int year_of_creating);
+	Route() {}
+	Route(int lenght, int time, string status, string date_of_shipping, string date_of_arrival, int number_places, string name, string speed, int year_of_creating);
 	void set_lenght(int lenght);
 	void set_time(int time);
 	void set_status(string status);
@@ -22,5 +24,5 @@ public:
 	string get_status();
 	string get_date_of_shipping();
 	string get_date_of_arrival();
-	~route() {}
+	~Route() {}
 };

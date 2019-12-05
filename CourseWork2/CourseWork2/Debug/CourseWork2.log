@@ -1,7 +1,6 @@
-﻿  airplane.cpp
-  main.cpp
-  order.cpp
-  place.cpp
-  route.cpp
-  Создание кода...
-  CourseWork2.vcxproj -> C:\Users\Gigabyte\second-course-work\CourseWork2\Debug\CourseWork2.exe
+﻿  Main.cpp
+Main.obj : error LNK2019: ссылка на неразрешенный внешний символ "public: __thiscall List<class Airplane>::List<class Airplane>(void)" (??0?$List@VAirplane@@@@QAE@XZ) в функции _main
+Main.obj : error LNK2019: ссылка на неразрешенный внешний символ "public: void __thiscall List<class Airplane>::push(class Airplane const &)" (?push@?$List@VAirplane@@@@QAEXABVAirplane@@@Z) в функции _main
+Main.obj : error LNK2019: ссылка на неразрешенный внешний символ "public: void __thiscall List<class Airplane>::show(void)" (?show@?$List@VAirplane@@@@QAEXXZ) в функции _main
+Main.obj : error LNK2019: ссылка на неразрешенный внешний символ "public: __thiscall List<class Airplane>::~List<class Airplane>(void)" (??1?$List@VAirplane@@@@QAE@XZ) в функции _main
+C:\Users\shaut\second-course-work\CourseWork2\Debug\CourseWork2.exe : fatal error LNK1120: неразрешенных внешних элементов: 4

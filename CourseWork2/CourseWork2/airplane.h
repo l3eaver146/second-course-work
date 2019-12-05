@@ -1,6 +1,7 @@
 #pragma once
-#include "header.h"
-class airplane
+
+#include "Header.h"
+class Airplane
 {
 protected:
 	int number_places;
@@ -8,8 +9,8 @@ protected:
 	string speed;
 	int year_of_creating;
 public:
-	airplane() {}
-	airplane(int number_places, string name, string speed, int year_of_creating);
+	Airplane() {}
+	Airplane(int number_places, string name, string speed, int year_of_creating);
 	int get_number_places();
 	string get_name();
 	string get_speed();
@@ -18,6 +19,6 @@ public:
 	void set_name(string name);
 	void set_speed(string speed);
 	void set_number_places(int number_places);
-	~airplane() {}
+	~Airplane() {}
 };
 

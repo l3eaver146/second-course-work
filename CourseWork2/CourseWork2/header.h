@@ -1,9 +1,10 @@
 #pragma once
+
 #include <iostream>
 #include <string>
 #include <ctime>
 #include <iomanip>
-#include"MyStack.h"
+#include <fstream>
 
 using namespace std;
 
