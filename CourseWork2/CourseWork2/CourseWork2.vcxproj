@@ -123,10 +123,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Admin.h" />
     <ClInclude Include="Airplane.h" />
     <ClInclude Include="Authorization.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="List.h" />
+    <ClInclude Include="List_For_Orders_Data.h" />
     <ClInclude Include="Order.h" />
     <ClInclude Include="Place.h" />
     <ClInclude Include="Route.h" />
