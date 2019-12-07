@@ -1,5 +1,8 @@
 #include "Header.h"
 #include "Airplane.h"
+Airplane::Airplane()
+{
+}
 Airplane::Airplane(int number_places, string name, string speed, int year_of_creating)
 {
 	this->set_number_places(number_places);
@@ -46,4 +49,8 @@ void Airplane::set_speed(string speed)
 void Airplane::set_number_places(int number_places)
 {
 	this->number_places = number_places;
+}
+
+Airplane::~Airplane()
+{
 }

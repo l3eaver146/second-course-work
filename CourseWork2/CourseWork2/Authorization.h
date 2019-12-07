@@ -1,20 +1,7 @@
 #pragma once
-#include "Header.h"
 #include "List.h"
-#include "Users.h"
-static void check(int& n) {
-	while (true) {
-		cin >> n;
-		if (cin.get() == '\n') {
-			break;//проверка на корректность вводимых данных
-		}
-		else {
-			cin.clear();
-			cin.ignore(256, '\n');//максимальное принимаемое число 
-			cout << "некорректный ввод, повторите попытку \n Enter parametr again ";
-		}//если данные не соответствуют типу, то сообщаем об ошибке
-	}
-}
+#include "UserWork.cpp"
+
 static void menu_autorization() {
 	cout << "\t \t \t Здравствуйте, пользователь!" << endl;
 	cout << "Выберите, способ идентификации :" << endl;
@@ -91,7 +78,7 @@ static void edintification() {
 	int choise = 0;
 	while (flag == true) {
 		menu_autorization();
-		check(choise);
+		cin >> choise;
 		switch (choise) {
 		case 1: {
 			authotize(temp_login,temp_password,list_of_users,flag);
@@ -99,6 +86,7 @@ static void edintification() {
 		}
 		case 2: {
 			registration(temp_login, temp_password, list_of_users, flag, File_of_users);
+			work_user();
 			break;
 		}
 		case 0: {

@@ -128,7 +128,6 @@
     <ClInclude Include="Authorization.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="List.h" />
-    <ClInclude Include="List_For_Orders_Data.h" />
     <ClInclude Include="Order.h" />
     <ClInclude Include="Place.h" />
     <ClInclude Include="Route.h" />
@@ -136,11 +135,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Airplane.cpp" />
+    <ClCompile Include="List.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Order.cpp" />
     <ClCompile Include="Place.cpp" />
     <ClCompile Include="Route.cpp" />
     <ClCompile Include="Users.cpp" />
+    <ClCompile Include="UserWork.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
