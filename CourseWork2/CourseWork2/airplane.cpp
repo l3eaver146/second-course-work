@@ -54,3 +54,17 @@ void Airplane::set_number_places(int number_places)
 Airplane::~Airplane()
 {
 }
+
+std::ifstream& operator>>(std::ifstream& in, Airplane& Airplane)
+{
+	in >> Airplane.name;
+	in >> Airplane.number_places;
+	in >> Airplane.speed;
+	in >> Airplane.year_of_creating;
+	return in;
+}
+
+std::ostream& operator<<(std::ostream& out, const Airplane& Airplane)
+{
+	return out;
+}

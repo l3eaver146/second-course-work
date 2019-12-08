@@ -18,3 +18,17 @@ Place::Place(int number_of_place, string name_of_class, int number_places, strin
 void Place::set_number_of_place(int number_of_place) {
 	this->number_of_place = number_of_place;
 }
+
+std::ifstream& operator>>(std::ifstream& in, Place& Place)
+{
+	in >> Place.number_of_place;
+	in >> Place.name_of_class;
+	in >> Place.name;
+	in >> Place.number_places;
+	return in;
+}
+
+std::ostream& operator<<(std::ostream& out, const Place& Place)
+{
+	return out;
+}

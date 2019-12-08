@@ -26,6 +26,7 @@ public:
 	int get_price();
 	int get_number_of_places();
 	int get_number_of_order();
-	void show_data_order();
+	friend std::ifstream& operator>> (std::ifstream& in, Order& Order);
+	friend std::ostream& operator<< (std::ostream& out, const Order& Order);
 	~Order() {}
 };

@@ -24,5 +24,7 @@ public:
 	string get_status();
 	string get_date_of_shipping();
 	string get_date_of_arrival();
+	friend std::ifstream& operator>> (std::ifstream& in, Route&Route);
+	friend std::ostream& operator<< (std::ostream& out, const Route& Route);
 	~Route() {}
 };

@@ -63,13 +63,43 @@ int Order::get_number_of_order()
 	return this->number_of_order;
 }
 
-void Order::show_data_order()
+
+std::ifstream& operator>>(std::ifstream& in, Order& Order)
 {
-	cout << "Краткая информация о вашем заказе :" << endl;
-	cout << "Дата отправления : " << get_date_of_shipping()<<endl;
-	cout << "Дата прибытия : " << get_date_of_arrival() << endl;
-	cout << "Количество забронированных мест : " << get_number_of_places() << endl;
-	cout << "Номер заказа : " << get_number_of_order() << endl;
-	cout << "Страна отправления : " << get_departs_country() << endl;
-	cout << "Страна прибытия : " << get_arrival_country()<< endl;
+	in >> Order.date_of_shipping;
+	in >> Order.date_of_arrival;
+	in >> Order.lenght;
+	in >> Order.name;
+	in >> Order.name_of_class;
+	in >> Order.number_of_order;
+	in >> Order.number_of_places;
+	in >> Order.number_places;
+	in >> Order.number_of_place;
+	in >> Order.price;
+	in >> Order.speed;
+	in >> Order.status;
+	in >> Order.time;
+	in >> Order.year_of_creating;
+	in >> Order.arrival_contry;
+	in >> Order.departs_contry;
+	return in;
+}
+
+std::ostream& operator<<(std::ostream& out, const Order& Order)
+{
+	out << "Краткая информация о вашем заказе :" << endl;
+	out << "Дата отправления : " << Order.date_of_shipping<< endl;
+	out << "Дата прибытия : " << Order.date_of_arrival << endl;
+	out << "Количество забронированных мест : " << Order.number_of_places << endl;
+	out << "Номер заказа : " << Order.number_of_order << endl;
+	out << "Страна отправления : " << Order.departs_contry << endl;
+	out << "Страна прибытия : " << Order.arrival_contry << endl;
+	out << "Дополнительная информация о заказе : " << endl;
+	out << "Расстояние : " << Order.lenght<<endl;
+	out << "Имя самолёта : " << Order.name<<endl;
+	out << "Скорость самолёта : " << Order.speed << endl;
+	out << "Число пассажиров : " << Order.number_places << endl;
+	out << "Номер вашего места : " << Order.number_of_place << endl;
+	out << "Ваше место " << Order.name_of_class << " класса " << endl;
+	return out;
 }

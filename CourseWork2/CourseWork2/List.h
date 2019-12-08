@@ -1,7 +1,8 @@
 #pragma once
 #include "Header.h"
-#include "Users.h"
-#include "Order.h"
+#include "IncludeClasses.h"
+
+/*universal list template*/
 template<class T>
 struct Line
 {
@@ -10,7 +11,7 @@ struct Line
 	Line<T>* prev; //указатель на предыдующий элемент
 };
 
-template<class T>/*universal list template*/
+template<class T>
 class List
 {
 private:
@@ -38,19 +39,29 @@ public:
 	~List(); //деструктор без параметров
 };
 
-template<>/*for class order*/
+/*for class order*/
+template<>
+struct Line<Order>
+{
+	Order obj; //элемент
+	Line<Order>* next; //указатель на следующий элемент
+	Line<Order>* prev; //указатель на предыдующий элемент
+};
+template<>
 class List<Order> {
 private:
 	Line<Order>* begin;
 	Line<Order>* end; //указатель на конец списка
 	int count; //количество элементов
 public:
-	void pushOrder(const Order&); //добавить элемент в начало
+	List();
+	~List();
+	void push(const Order&); //добавить элемент в начало
 	void dellAll();  //удалить все элементы
 	int getCount();  //метод, возвращающий поле count
 	//Order dellPoint(Line<Order>*);//удаление заданного элемента
 	void show_orders(); //метод, вывод€щий все элемента списка с начала
-	void readFileOrder(string);  //чтение данных из файла
+	void readFile(string);  //чтение данных из файла
 	void writeFileOrder(string); //запись данных в файл
 	bool isEmpty(); //метод, провер€ющий список на пустоту    
 	void writeEndFileOrder(string filename, Order obj);

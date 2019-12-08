@@ -18,6 +18,8 @@ public:
 	void set_name(string name);
 	void set_speed(string speed);
 	void set_number_places(int number_places);
+	friend std::ifstream& operator>> (std::ifstream& in, Airplane& Airplane);
+	friend std::ostream& operator<< (std::ostream& out, const Airplane& Airplane);
 	~Airplane();
 };
 

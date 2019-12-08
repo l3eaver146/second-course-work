@@ -59,3 +59,22 @@ string Route::get_date_of_arrival()
 {
 	return this->date_of_arrival;
 }
+
+std::ifstream& operator>>(std::ifstream& in, Route &Route)
+{
+	in >> Route.lenght;
+	in >> Route.time;
+	in >> Route.status;
+	in >> Route.date_of_shipping;
+	in >> Route.date_of_arrival;
+	in >> Route.name;
+	in >> Route.number_places;
+	in >> Route.speed;
+	in >> Route.year_of_creating;
+	return in;
+}
+
+std::ostream& operator<<(std::ostream& out, const Route& Route)
+{
+	return out;
+}

@@ -187,12 +187,8 @@ inline void List<T>::readFileusers(string fileName)
 {
 	ifstream fin(fileName, ios::in);
 	T temp;
-	string login, password, root;
 	while (!fin.eof()) {
-		fin >> login >> password >> root;
-		temp.Users::set_login(login);
-		temp.Users::set_password(password);
-		temp.Users::set_root(root);
+		fin >> temp;
 		this->push(temp);
 	}
 	fin.close();
@@ -311,65 +307,63 @@ inline void List<T>::showBack()
 	}
 }
 /* —пециализированный шаблон дл€ работы с классом Order*/
+inline List<Order>::List()
+{
+	count = 0;
+	begin = NULL;
+	end = NULL;
+}
+inline List<Order>::~List()
+{
+	Line<Order>* tmp = nullptr;
+	if (begin != NULL)
+	{
+		while (begin != NULL)
+		{
+			tmp = begin->next;
+			delete begin;
+			begin = tmp;
+		}
+	}
+}
  inline void List<Order>::show_orders()
 {
 	Line<Order>* current = nullptr;
 	current = begin;
-	current->obj.Order::show_data_order();
+	cout<<current->obj;
 	while (current->next != NULL)
 	{
 		current = current->next;
-		current->obj.Order::show_data_order();
+		cout<<current->obj;
 	}
 }
- inline void List<Order>::pushOrder(const Order& obj)
+ inline void List<Order>::push(const Order& obj)
 {
-	count++;
-	Line<Order>* temp = new Line<Order>;
-	temp->next = NULL;
-	Line<Order>* current = nullptr;
-	temp->obj = obj;
-	if (begin != NULL)
-	{
-		temp->prev = end;
-		end->next = temp;
-		end = temp;
-		current = end;
-	}
-	else
-	{
-		temp->prev = NULL;
-		begin = end = temp;
-	}
+	 count++;
+	 Line<Order>* temp = new Line<Order>;
+	 temp->next = NULL;
+	 Line<Order>* current = nullptr;
+	 temp->obj = obj;
+	 if (begin != NULL)
+	 {
+		 temp->prev = end;
+		 end->next = temp;
+		 end = temp;
+		 current = end;
+	 }
+	 else
+	 {
+		 temp->prev = NULL;
+		 begin = end = temp;
+	 }
 }
- inline void List<Order>::readFileOrder(string fileName)
+ inline void List<Order>::readFile(string fileName)
 {
-	ifstream fin(fileName, ios::in);
+	ifstream fin(fileName,ios::in);
 	Order temp;
-	int number_of_order, lenght, time, number_of_places, price, number_places, number_of_place, year_of_creating = 0;
-	string date_of_arrival, date_of_shipping, name_of_class, status, name, speed,departs_contry,arrival_contry;
 	while (!fin.eof()) {
-		fin >> number_places >> name >> speed >> number_of_place
-			>> name_of_class >> lenght >> time >> status >> date_of_arrival
-			>> date_of_shipping >> price >> number_of_places >> number_of_order
-			>> arrival_contry >> departs_contry;
-		temp.Order::set_date_of_arrival(date_of_arrival);
-		temp.Order::set_date_of_shipping(date_of_shipping);
-		temp.Order::set_lenght(lenght);
-		temp.Order::set_name(name);
-		temp.Order::set_name_of_class(name_of_class);
-		temp.Order::set_number_of_order(number_of_order);
-		temp.Order::set_number_of_place(number_of_place);
-		temp.Order::set_number_of_places(number_of_places);
-		temp.Order::set_number_places(number_of_places);
-		temp.Order::set_price(price);
-		temp.Order::set_speed(speed);
-		temp.Order::set_status(status);
-		temp.Order::set_time(time);
-		temp.Order::set_year_of_creating(year_of_creating);
-		temp.Order::set_arrival_country(arrival_contry);
-		temp.Order::set_departs_country(departs_contry);
-		this->pushOrder(temp);
+		fin >> temp;
+		this->push(temp);
 	}
 	fin.close();
 }

@@ -17,5 +17,7 @@ public:
 	string get_password();
 	string get_root();
 	void show_data_users();
+	friend std::istream& operator>> (std::ifstream& in, Users& Users);
+	friend std::ostream& operator<< (std::ostream& out, const Users& Users);
 };
 

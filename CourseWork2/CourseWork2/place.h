@@ -13,5 +13,7 @@ public:
 	void set_name_of_class(string name_of_class);
 	int get_numebr_of_place();
 	string get_name_of_class();
+	friend std::ifstream& operator>> (std::ifstream& in, Place &Place);
+	friend std::ostream& operator<< (std::ostream& out, const Place &Place);
 	~Place() {}
 };

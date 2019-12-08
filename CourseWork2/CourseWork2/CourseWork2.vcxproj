@@ -127,6 +127,8 @@
     <ClInclude Include="Airplane.h" />
     <ClInclude Include="Authorization.h" />
     <ClInclude Include="Header.h" />
+    <ClInclude Include="IncludeClasses.h" />
+    <ClInclude Include="InludeTemplates.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Order.h" />
     <ClInclude Include="Place.h" />
