@@ -17,8 +17,8 @@ protected:
 public:
 	Order();
 	~Order();
-	Order();
-	Order();
+	Order(int, string, string, string, string, string, string, string, string, string, string, string, string,string,string,int,string,string,string,string,string,string,string);/*Для бизнесс класса*/
+	Order(int, string, string , string, string, string, string , string, string, string , string, string, string, int, string, string, string, string, string, string, string);/*Для эконом класса*/
 	void set_number_of_place(int);
 	void set_date_of_shipping(string);
 	void set_date_of_arrival(string);
