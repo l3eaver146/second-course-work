@@ -24,41 +24,5 @@ static void check(int& n) {
 	}
 }
 static void work_user() {
-	string file_of_orders="Orders.txt";
-	List <Order> list_of_orders;
-	list_of_orders.readFile(file_of_orders);
-	bool flag = true;
-	while (flag == true) {
-		menu_user();
-		int choise=0;
-		check(choise);
-		switch (choise)
-		{
-		case 1:
-		{
-			list_of_orders.show_orders();
-			break;
-		}
-		case 2:
-		{
-			cout << "В стадии разработки !";
-			//system("cls");
-			break;
-		}
-		case 3:
-		{
-			cout << "В стадии разработки !";
-			//system("cls");
-			break;
-		}
-		case 0:
-		{
-			flag = false;
-			break;
-		}
-		default:
-			cout << "Такого варианта нет! Повторите попытку ввода данных : ";
-			break;
-		}
-	}
+	
 }
