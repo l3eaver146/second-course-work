@@ -1,0 +1,6 @@
+S903 Belarus USA Minsk Vashington
+D390 China Belarus Shanhai Minsk
+B345 Russia Belarus Moscva Grodno
+G453 Bolgaria Belarus Sofia Minsk
+H123 Turkey Russia Ancara Moscva
+G432 Egypt Belarus Kair Grodno

@@ -98,6 +98,26 @@ string Order::get_arrival_city()
 	return this->arrival_city;
 }
 
+void Order::show_flight()
+{
+	cout << "Номер рейса : " << this->get_flight()<<endl;
+	cout << "Страна отправления : " << this->get_departs_contry() << endl;
+	cout << "Страна прибытия : " << this->get_arrive_contry() << endl;
+	cout << "Город отправления : " << this->get_departs_city() << endl;
+	cout << "Город прибытия : " << this->get_arrival_city() << endl;
+}
+
+Order& Order::operator=(const Order& other)
+{
+	this->arrive_contry = other.arrive_contry;
+	this->arrival_city = other.arrival_city;
+	this->flight = other.flight;
+	this->departs_city = other.departs_city;
+	this->departs_contry = other.departs_contry;
+
+	return *this;
+}
+
 Order::~Order()
 {
 }

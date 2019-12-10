@@ -130,10 +130,9 @@
     <ClInclude Include="Econom_class.h" />
     <ClInclude Include="Order.h" />
     <ClInclude Include="Header.h" />
-    <ClInclude Include="IncludeClasses.h" />
-    <ClInclude Include="InludeTemplates.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Passenger_data.h" />
+    <ClInclude Include="Protect.h" />
     <ClInclude Include="Users.h" />
   </ItemGroup>
   <ItemGroup>
@@ -141,11 +140,9 @@
     <ClCompile Include="Business_class.cpp" />
     <ClCompile Include="Econom_class.cpp" />
     <ClCompile Include="Order.cpp" />
-    <ClCompile Include="List.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Passenger_data.cpp" />
     <ClCompile Include="Users.cpp" />
-    <ClCompile Include="UserWork.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

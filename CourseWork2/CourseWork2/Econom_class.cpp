@@ -11,11 +11,31 @@ Econom_class::~Econom_class()
 {
 }
 
+
+
 Econom_class::Econom_class(string press, string porthole, string location)
 {
 	this->set_press(press);
 	this->set_porthole(porthole);
 	this->set_location(location);
+}
+
+void Econom_class::set_all()
+{
+	string temp;
+	while (true) {
+		cout << "Введите желаемое расположение вашего места(Центр,Голова или Хвост) : ";
+		cin >> temp;
+		if (temp == "Центр" || temp == "Голова" || temp == "Хвост")
+			break;
+		else cout << "Некорректный воод даннх!" << endl;
+		
+	}
+	this->set_location(temp);
+	this->set_press("Газеты");
+	while (temp != "Есть" || temp != "Нет")
+		cin >> temp;
+	this->set_porthole("Есть");
 }
 
 void Econom_class::set_location(string location)

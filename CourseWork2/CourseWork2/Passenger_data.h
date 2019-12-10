@@ -11,6 +11,7 @@ protected:
 public :
 	Passenger_data();
 	~Passenger_data();
+	void set_all();
 	Passenger_data(string, string, string, string);
 	void set_name(string);
 	void set_surname(string);

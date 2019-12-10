@@ -1,6 +1,4 @@
 #include "Header.h"
-#include "List.h"
-#include "Users.h"
 #include "Authorization.h"
 
 int main() {

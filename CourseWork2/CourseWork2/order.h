@@ -33,5 +33,8 @@ public:
 	string get_departs_city();
 	string get_flight();
 	string get_arrival_city();
+	void show_flight();
+	void enter_eo_data();
+	Order& operator= (const Order& other);
 };
 

@@ -8,6 +8,9 @@ Air_ticket::Air_ticket()
 	this->status = "";
 }
 
+void Air_ticket::set_all() {
+	this->set_number_of_ticket(rand() % (100 - 1 + 1) + 1);
+}
 Air_ticket::~Air_ticket()
 {
 }
@@ -50,7 +53,7 @@ string Air_ticket::get_departs_contry()
 	return this->departs_contry;
 }
 
-string Air_ticket::set_arrive_contry()
+string Air_ticket::get_arrive_contry()
 {
 	return this->arrive_contry;
 }

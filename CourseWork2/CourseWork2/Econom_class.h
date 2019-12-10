@@ -11,6 +11,7 @@ public:
 	Econom_class();
 	~Econom_class();
 	Econom_class(string, string, string);
+	void set_all();
 	void set_location(string);
 	void set_press(string);
 	void set_porthole(string);

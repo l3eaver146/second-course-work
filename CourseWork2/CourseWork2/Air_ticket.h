@@ -9,6 +9,7 @@ protected:
 	string arrive_contry;
 public:
 	Air_ticket();
+	virtual void set_all();
 	~Air_ticket();
 	Air_ticket(int, string, string, string);
 	void set_number_of_ticket(int);
@@ -17,7 +18,7 @@ public:
 	void set_arrive_contry(string);
 	string get_status();
 	string get_departs_contry();
-	string set_arrive_contry();
+	string get_arrive_contry();
 	int get_number_of_ticket();
 	friend std::istream& operator>> (std::istream& in, Air_ticket & obj);
 	friend std::ostream& operator<< (std::ostream& out, const  Air_ticket& obj);

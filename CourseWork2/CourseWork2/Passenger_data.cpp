@@ -12,6 +12,22 @@ Passenger_data::~Passenger_data()
 {
 }
 
+void Passenger_data::set_all() {
+	string temp;
+	cout << " ¬ведите вашу ‘амилию : ";
+	cin >> temp;
+	this->set_surname(temp);
+	cout << "¬ведите ваше »м€ : ";
+	cin >> temp;
+	this->set_name(temp);
+	cout << "¬ведите ваше ќтчество : ";
+	cin >> temp;
+	this->set_patronimyc(temp);
+	cout << "¬ведите номер вашего паспорта : ";
+	cin >> temp;
+	this->set_passport_number(temp);
+}
+
 Passenger_data::Passenger_data(string name, string surname, string patronimyc, string passport_number)
 {
 	this->set_name(name);
