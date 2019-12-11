@@ -171,10 +171,16 @@ void Users::make_bo()
 void Users::make_eo()
 {
 	List<Order>list;
+	list.readFileFlights("Flights.txt");
 	string temp_flight;
 	cout << "Введите номер желаемого рейса :";
 	cin >> temp_flight;
 	Order obj=list.search_by_flight(temp_flight);
+	obj.set_status("Econom");
+	((Passenger_data)obj).set_all();
+	((Air_ticket)obj).set_all();
+	((Econom_class)obj).set_all();
+
 }
 void Users::menu_user() {
 	cout << "Здравствуйте , пользователь!" << endl;
@@ -201,6 +207,7 @@ void Users::userwork()
 		}
 		case 2: {
 			Order obj;
+			obj.set_login(this->get_login());
 			bool exit = true;
 			while (!exit) {
 				cout << "1 - Заказать билет бизнесс класса " << endl;

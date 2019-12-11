@@ -107,6 +107,23 @@ void Order::show_flight()
 	cout << "Город прибытия : " << this->get_arrival_city() << endl;
 }
 
+void Order::enter_eo_data()
+{
+	string temp;
+	cout << " Введите вашу Фамилию : ";
+	cin >> temp;
+	this->set_surname(temp);
+	cout << "Введите ваше Имя : ";
+	cin >> temp;
+	this->set_name(temp);
+	cout << "Введите ваше Отчество : ";
+	cin >> temp;
+	this->set_patronimyc(temp);
+	cout << "Введите номер вашего паспорта : ";
+	cin >> temp;
+	this->set_passport_number(temp);
+}
+
 Order& Order::operator=(const Order& other)
 {
 	this->arrive_contry = other.arrive_contry;
