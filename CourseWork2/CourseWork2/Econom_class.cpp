@@ -11,8 +11,6 @@ Econom_class::~Econom_class()
 {
 }
 
-
-
 Econom_class::Econom_class(string press, string porthole, string location)
 {
 	this->set_press(press);
@@ -22,20 +20,85 @@ Econom_class::Econom_class(string press, string porthole, string location)
 
 void Econom_class::set_all()
 {
-	string temp;
-	while (true) {
-		cout << "Введите желаемое расположение вашего места(Центр,Голова или Хвост) : ";
-		cin >> temp;
-		if (temp == "Центр" || temp == "Голова" || temp == "Хвост")
+	string cho;
+	bool flag = true;
+	while (flag == true) {
+		cout << "Введите желаемое расположение вашего места : " << endl;
+		cout << "1 - Центр " << endl;
+		cout << "2 - Голова " << endl;
+		cout << "3 - Хвост " << endl;
+		cin >> cho;
+		switch (cho[0]) {
+		case '1': {
+			this->set_location("Центр");
+			flag = false;
 			break;
-		else cout << "Некорректный воод даннх!" << endl;
-		
+		}
+		case '2': {
+			this->set_location("Голова");
+			flag = false;
+			break;
+		}
+		case '3': {
+			this->set_location("Хвост");
+			flag = false;
+			break;
+		}
+		default: {
+			cout << "Нет такого варианта!" << endl;
+		}
+		}
 	}
-	this->set_location(temp);
-	this->set_press("Газеты");
-	while (temp != "Есть" || temp != "Нет")
-		cin >> temp;
-	this->set_porthole("Есть");
+	flag = true;
+	while (flag == true) {
+		cout << "Введите желаемую литературу : " << endl;
+		cout << "1 - Газеты " << endl;
+		cout << "2 - Журналы " << endl;
+		cout << "3 - Книги " << endl;
+		cin >> cho;
+		switch (cho[0]) {
+		case '1': {
+			this->set_press("Газеты");
+			flag = false;
+			break;
+		}
+		case '2': {
+			this->set_press("Журналы");
+			flag = false;
+			break;
+		}
+		case '3': {
+			this->set_press("Книги");
+			flag = false;
+			break;
+		}
+		default: {
+			cout << "Нет такого варианта!" << endl;
+		}
+		}
+	}
+	flag = true;
+	while (flag == true) {
+		cout << "Хотите во время полета смотреть в иллюминатор : " << endl;
+		cout << "1 - Да " << endl;
+		cout << "2 - Нет " << endl;
+		cin >> cho;
+		switch (cho[0]) {
+		case '1': {
+			this->set_porthole("Есть");
+			flag = false;
+			break;
+		}
+		case '2': {
+			this->set_porthole("Нет");
+			flag = false;
+			break;
+		}
+		default: {
+			cout << "Нет такого варианта!" << endl;
+		}
+		}
+	}
 }
 
 void Econom_class::set_location(string location)

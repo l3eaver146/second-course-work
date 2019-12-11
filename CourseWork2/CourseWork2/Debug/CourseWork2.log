@@ -1,5 +1,7 @@
-﻿Users.obj : error LNK2005: "public: void __thiscall List<class Order>::readFileFlights(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?readFileFlights@?$List@VOrder@@@@QAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) уже определен в Order.obj
-Users.obj : error LNK2005: "public: void __thiscall List<class Order>::show_flights(void)" (?show_flights@?$List@VOrder@@@@QAEXXZ) уже определен в Order.obj
-Users.obj : error LNK2005: "public: void __thiscall List<class Order>::writeEndFileFlights(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class Order)" (?writeEndFileFlights@?$List@VOrder@@@@QAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@VOrder@@@Z) уже определен в Order.obj
-Users.obj : error LNK2005: "public: void __thiscall List<class Order>::writeFileFlights(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?writeFileFlights@?$List@VOrder@@@@QAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) уже определен в Order.obj
-C:\Users\Gigabyte\second-course-work\CourseWork2\Debug\CourseWork2.exe : fatal error LNK1169: обнаружен многократно определенный символ - один или более
+﻿  Main.cpp
+  Order.cpp
+  Users.cpp
+  Создание кода...
+C:\Users\Gigabyte\second-course-work\CourseWork2\CourseWork2\Main.cpp(6,12): warning C4244:  аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+C:\Users\Gigabyte\second-course-work\CourseWork2\CourseWork2\List.h(737): warning C4715:  List<Order>::search_by_flight: значение возвращается не при всех путях выполнения
+  CourseWork2.vcxproj -> C:\Users\Gigabyte\second-course-work\CourseWork2\Debug\CourseWork2.exe

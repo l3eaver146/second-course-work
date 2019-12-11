@@ -9,7 +9,7 @@ protected:
 	string arrive_contry;
 public:
 	Air_ticket();
-	virtual void set_all();
+	void set_all();
 	~Air_ticket();
 	Air_ticket(int, string, string, string);
 	void set_number_of_ticket(int);

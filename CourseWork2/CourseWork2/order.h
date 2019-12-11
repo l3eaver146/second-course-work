@@ -16,6 +16,7 @@ protected:
 	string arrival_city;
 public:
 	Order();
+	void show_order_data();
 	~Order();
 	Order(int, string, string, string, string, string, string, string, string, string, string, string, string,string,string,int,string,string,string,string,string,string,string);/*Для бизнесс класса*/
 	Order(int, string, string , string, string, string, string , string, string, string , string, string, string, int, string, string, string, string, string, string, string);/*Для эконом класса*/
@@ -34,7 +35,10 @@ public:
 	string get_flight();
 	string get_arrival_city();
 	void show_flight();
-	void enter_eo_data();
 	Order& operator= (const Order& other);
+	void set_data();
+	void set_data_bo();
+	friend std::ifstream& operator>> (std::ifstream& in, Order& Order);
+	friend std::ofstream& operator<< (std::ofstream& out, const Order& Order);
 };
 
