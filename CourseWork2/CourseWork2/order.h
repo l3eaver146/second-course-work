@@ -26,6 +26,7 @@ public:
 	void set_price(string);
 	void set_departs_city(string);
 	void set_flight(string);
+	void set_data_flight();
 	void set_arrival_city(string);
 	int get_number_of_place();
 	string get_date_of_shipping();

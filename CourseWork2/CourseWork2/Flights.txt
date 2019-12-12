@@ -1,6 +1,9 @@
 S903 Belarus USA Minsk Vashington 22.12.19 23.12.19
 D390 China Belarus Shanhai Minsk 22.12.19 23.12.19
-B345 Russia Belarus Moscva Grodno 22.12.19 23.12.19
+B345 Russia Belarus Moscva Grodno 23.12.19 23.12.19
 G453 Bolgaria Belarus Sofia Minsk 22.12.19 23.12.19
 H123 Turkey Russia Ancara Moscva 22.12.19 23.12.19
-G432 Egypt Belarus Kair Grodno 22.12.19 23.12.19
+G432 Egypt Belarus Kair Grodno 23.12.19 23.12.19
+L222 Belarus Russia Minsk Moscov 21.12.19 23.12.19
+L565 China Russia Shanhay SPB 12.11.19 13.11.19
+B123 Russia Belarus SPB Minsk 27.12.19 28.12.19

@@ -25,10 +25,14 @@ public:
 	void registration(bool& flag);
 	void make_bo(string);
 	void userwork(string);
+	void show_orders(string);
 	void adminwork(string);
 	void make_eo(string);
+	void edit_flights();
+	void edit_flight();
 	void menu_user();
 	void menu_admin();
+	void edit_user_root();
 	void make_order(string login);
 	friend std::ifstream& operator>> (std::ifstream& in, Users& Users);
 	friend std::ostream& operator<< (std::ostream& out, const Users& Users);

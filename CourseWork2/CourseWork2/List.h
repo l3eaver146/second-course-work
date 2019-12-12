@@ -57,11 +57,12 @@ public:
 	void push(const Users&); //добавить элемент в начало
 	void pushBack(const Users&); //добавить элемент в конец
 	int getCount();  //метод, возвращающий поле count
+	void edit_by_login(string);
 	Users dellPoint(Line<Users>*);//удаление заданного элемента
 	void show_users(); //метод, выводящий все элемента списка с начала
 	void readFile(string);  //чтение данных из файла
 	void writeFile(string); //запись данных в файл    
-	bool check_user_data(string, string);
+	bool check_user_data(string, string,string&);
 	bool check_on_copy(string);
 	void writeEndFileusers(string filename, Users obj);
 	~List(); //деструктор без параметров
@@ -101,6 +102,7 @@ public:
 	void writeEndFileBO(string,Order); //запись данных в файл    
 	void writeEndFileEO(string, Order &);
 	void writeEndFileFlights(string filename, Order obj);
+	void edit_flight(string);
 	Order search_by_flight(string);
 	void show_orders_by_login(string);
 	int return_index_of_order(string flight,string login,int number_of_ticket );
@@ -399,7 +401,7 @@ inline void List<Users>::readFile(string fileName)
 	}
 	fin.close();
 }
-inline bool List<Users>::check_user_data(string login, string password)
+inline bool List<Users>::check_user_data(string login, string password,string &root)
 {
 	int steps = 0;
 	bool res = false;
@@ -407,6 +409,7 @@ inline bool List<Users>::check_user_data(string login, string password)
 	current = begin;
 	while (current != NULL) {
 		if ((current->obj.get_login() == login) && (current->obj.get_password() == password)) {
+			root=current->obj.get_root();
 			res = true;
 			break;
 		}
@@ -433,18 +436,18 @@ inline bool List<Users>::check_on_copy(string login)
 inline void List<Users>::writeEndFileusers(string filename, Users obj)
 {
 	fstream add(filename, ios::app);
-	add << obj.get_login() << " " << obj.get_password() << " " << obj.get_root() << endl;
+	add <<endl<< obj.get_login() << " " << obj.get_password() << " " << obj.get_root();
 	add.close();
 }
 inline void List<Users>::show_users()
 {
 	Line<Users>* current = nullptr;
 	current = begin;
-	current->obj.show_data_users();
+	cout<<current->obj;
 	while (current->next != NULL)
 	{
 		current = current->next;
-		current->obj.show_data_users();
+		cout<<current->obj;
 	}
 }
 inline void List<Users>::pushBack(const Users& obj)
@@ -509,15 +512,37 @@ inline int List<Users>::getCount()
 {
 	return this->count;
 }
+inline void List<Users>::edit_by_login(string login) {
+	int steps = 0;
+	Line<Users>* current = nullptr;
+	current = begin;
+	while (current != NULL) {
+		if ((current->obj.get_login() == login)) {
+			steps++;
+			current->obj.set_root("admin");
+			break;
+		}
+		current = current->next;
+	}
+	if (steps == 0) {
+		cout << "Пользователя с таким логином не существует" << endl;
+	}
+	else cout << "Права успешно изменены!" << endl;
+}
 inline void List<Users>::writeFile(string fileName)
 {
 	ofstream fout(fileName, ios::out);
 	Line<Users>* current = nullptr;
-	current = end;
+	current = begin;
+	int i = 0;
 	while (current != NULL)
 	{
 		fout << current->obj;
-		current = current->prev;
+		if (i < count - 1) {
+			fout << endl;
+		}
+		current = current->next;
+		i++;
 	}
 	fout.close();
 }
@@ -706,13 +731,65 @@ void List<Order>::readFileFlights(string fileName)
 void List<Order>::writeEndFileFlights(string filename, Order obj)
 {
 	fstream add(filename, ios::app);
-	add << obj.get_flight() << " "
+	add <<endl<< obj.get_flight() << " "
 		<< obj.get_departs_contry() << " "
 		<< obj.get_arrive_contry() << " "
 		<< obj.get_departs_city() << " "
 		<< obj.get_arrival_city() << " "
 		<< obj.get_date_of_shipping() << " "
-		<< obj.get_date_of_arrival() << endl;
+		<< obj.get_date_of_arrival();
+}
+inline void List<Order>::edit_flight(string flight)
+{
+	int index = 0;
+	Line<Order>* current = nullptr;
+	current = begin;
+	while (current != NULL)
+	{
+		if (current->obj.get_flight() == flight)
+		{
+			index++;
+			bool flag = true;
+			int cho = 0;
+			while (flag) {
+				cout << "Что вы хотите изменить?" << endl;
+				cout << "1 - Дату отправления " << endl;
+				cout << "2 - Дату прибытия " << endl;
+				cout << "0 - Назад " << endl;
+				check(cho);
+				switch (cho)
+				{
+				case 1: {
+					string temp;
+					cout << "Введите новую дату отправления : ";
+					cin >> temp;
+					current->obj.set_date_of_shipping(temp);
+					break;
+				}
+				case 2: {
+					string temp;
+					cout << "Введите новую дату прибытия : ";
+					cin >> temp;
+					current->obj.set_date_of_arrival(temp);
+					break;
+				}
+				case 0: {
+					flag = false;
+					break;
+				}
+				default: {
+					cout << "Нет такого варианта!" << endl;
+					break;
+				}
+				}
+			}
+		}
+		current = current->next;
+	}
+	if (index == 0)
+	{
+		cout << "Нет рейса с таким номером!" << endl;
+	}
 }
 inline Order List<Order>::search_by_flight(string flight)
 {
@@ -794,9 +871,10 @@ inline int List<Order>::return_index_of_order(string flight,string login, int nu
 void List<Order>::writeFileFlights(string fileName)
 {
 	ofstream fout(fileName, ios::out);
+	int i = 0;
 	Line<Order>* current = nullptr;
 	current = begin;
-	while (current->next!= NULL)
+	while (current!= NULL)
 	{
 		fout << current->obj.get_flight() << " "
 			<< current->obj.get_departs_contry() << " "
@@ -804,8 +882,12 @@ void List<Order>::writeFileFlights(string fileName)
 			<< current->obj.get_departs_city() << " "
 			<< current->obj.get_arrival_city() << " "
 			<< current->obj.get_date_of_shipping() << " "
-			<< current->obj.get_date_of_arrival() << endl;
+			<< current->obj.get_date_of_arrival();
+		if (i < count - 1) {
+			fout << endl;
+		}
 		current = current->next;
+		i++;
 	}
 	fout.close();
 }

@@ -1,7 +1,3 @@
-﻿  Main.cpp
-  Order.cpp
-  Users.cpp
-  Создание кода...
-C:\Users\Gigabyte\second-course-work\CourseWork2\CourseWork2\Main.cpp(6,12): warning C4244:  аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-C:\Users\Gigabyte\second-course-work\CourseWork2\CourseWork2\List.h(737): warning C4715:  List<Order>::search_by_flight: значение возвращается не при всех путях выполнения
+﻿  Users.cpp
+C:\Users\Gigabyte\second-course-work\CourseWork2\CourseWork2\List.h(814): warning C4715:  List<Order>::search_by_flight: значение возвращается не при всех путях выполнения
   CourseWork2.vcxproj -> C:\Users\Gigabyte\second-course-work\CourseWork2\Debug\CourseWork2.exe

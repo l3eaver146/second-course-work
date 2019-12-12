@@ -58,6 +58,32 @@ void Order::set_flight(string flight)
 	this->flight = flight;
 }
 
+void Order::set_data_flight()
+{
+	string temp;
+	cout << "¬ведите номер нового рейса : " << endl;
+	cin >> temp;
+	this->set_flight(temp);
+	cout << "¬ведите страну отправлени€ : " << endl;
+	cin >> temp;
+	this->set_departs_contry(temp);
+	cout << "¬ведите страну прибыти€ :" << endl;
+	cin >> temp;
+	this->set_arrive_contry(temp);
+	cout << "¬ведите город отправлени€ : " << endl;
+	cin >> temp;
+	this->set_departs_city(temp);
+	cout << "¬ведите город прибыти€ :" << endl;
+	cin >> temp;
+	this->set_arrival_city(temp);
+	cout << "¬ведите дату отправлени€ : " << endl;
+	cin >> temp;
+	this->set_date_of_shipping(temp);
+	cout << "¬ведите дату прибыти€ :" << endl;
+	cin >> temp;
+	this->set_date_of_arrival(temp);
+}
+
 void Order::set_arrival_city(string arrival_city)
 {
 	this->arrival_city = arrival_city;

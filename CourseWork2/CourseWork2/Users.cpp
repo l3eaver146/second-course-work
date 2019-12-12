@@ -73,7 +73,7 @@ void Users::enter_password()
 	string s;
 	int ch = 0;
 	bool flag = true;
-	while (flag == true) {
+	//while (flag == true) {
 		while (true) {
 			ch = _getwch();
 			if (ch == 13) {//вводим до enter
@@ -88,14 +88,14 @@ void Users::enter_password()
 				s += (char)ch;
 			}
 		}
-		if (s.length() < 8) {
+		/*if (s.length() < 8) {
 			cout << "Ваш пароль слишком короткий!Длина должна быть не менее 8 символов." << endl;
 			cout << " Повторите попытку ввода : " << endl;
 		}
 		else {
 			flag = false;
-		}
-	}
+		}*/
+	//}
 	this->set_password(s);
 }
 
@@ -166,9 +166,12 @@ std::ifstream& operator>>(std::ifstream& in, Users& Users)
 
 std::ostream& operator<<(std::ostream& out, const Users& Users)
 {
-	out << "Информация о пользователях : " << endl;
-	out << "\t login : " << "\t root : " << endl;
-	out << Users.login << "\t" << Users.root << endl;;
+	out << endl;
+	out << "__________________________________________" << endl;
+	out << "Информация о пользователе : " << endl;
+	out << "login : " << Users.login << endl;
+	out<< "root : "<<Users.root << endl;
+	out << "__________________________________________" << endl;
 	return out;
 }
 
@@ -177,26 +180,30 @@ std::istream& operator>>(std::istream& in, Users& Users)
 	cout << "Введите логин : ";
 	in >> Users.login;
 	cout << "Введите пароль : ";
-	in >> Users.password;
+	Users.enter_password();
 	return in;
 }
 
 std::ofstream& operator<<(std::ofstream& out, const Users& Users)
 {
-	out << Users.login << " " << Users.password << " " << Users.root << endl;
+	out << Users.login << " " << Users.password << " " << Users.root;
 	return out;
 }
 
 void Users::authorization(bool& flag)
 {
+	system("color 02");
 	List<Users> list_of_users;
 	string File_of_users = "Users.txt";
 	list_of_users.readFile(File_of_users);
 	bool flag_exit_authorization = true;
 	while (flag_exit_authorization == true) {
+		string root;
 		Users temp_obj;
 		cin >> temp_obj;
-		bool result = list_of_users.check_user_data(temp_obj.get_login(), temp_obj.get_password());
+		
+		bool result = list_of_users.check_user_data(temp_obj.get_login(), temp_obj.get_password(),root);
+		temp_obj.set_root(root);
 		if (result == true) {
 			cout << endl << "Успешная авторизация!";
 			this->set_login(temp_obj.get_login());
@@ -210,11 +217,44 @@ void Users::authorization(bool& flag)
 			cout << endl << "Повторите попытку авторизации!\nВведенные вами данные неверны!\n";
 		}
 	}
-	if (this->get_root() == "admin")
+	if (this->get_root() == "admin") {
 		this->adminwork(this->get_login());
-	else this->userwork(this->get_login());
+	}
+	else {
+		this->userwork(this->get_login());
+	}
+	}
+void Users::show_orders(string login) {
+	int ch = 0;
+	bool fl = true;
+	while (fl == true) {
+		cout << "1 - Заказы эконом класса " << endl;
+		cout << "2 - Заказы бизнес класса " << endl;
+		cout << "0 - Назад " << endl;
+		check(ch);
+		switch (ch)
+		{
+		case 1: {
+			List <Order> list;
+			list.readFileEO("Econom_orders.txt");
+			list.show_orders_by_login(login);
+			break;
+		}
+		case 2: {
+			List <Order> list;
+			list.readFileBO("Business_orders.txt");
+			list.show_orders_by_login(login);
+			break;
+		}
+		case 0: {
+			fl = false;
+			break;
+		}
+		default:cout << "Такого варианта нет!" << endl;
+			break;
+		}
+	}
 }
-
 void Users::registration(bool& flag)
 {
 	List<Users> list_of_users;
@@ -277,13 +317,85 @@ void Users::make_eo(string login)
 	obj.set_login(login);
 	list.writeEndFileEO("Econom_orders.txt",obj);
 }
+void Users::edit_flights()
+{
+	bool flag = true;
+	while (flag) {
+		int choise = 0;
+		cout << "Выберите , как именно вы хотите измненить файл рейсов :" << endl;
+		cout << "1 - Добавить рейс " << endl;
+		cout << "2 - Удалить рейс " << endl;
+		cout << "3 - Редактировать рейс " << endl;
+		cout << "4 - Информация о всех рейсах " << endl;
+		cout << "0 - Назад" << endl;
+		check(choise);
+		switch (choise)
+		{
+		/*ready*/case 1: {
+			List<Order>list_of_flights;
+			Order flight;
+			flight.set_data_flight();
+			list_of_flights.writeEndFileFlights("Flights.txt",flight);
+			break;
+		}
+		case 2: {
+
+			break;
+		}
+		case 3: {
+			this->edit_flight();
+			break;
+		}
+		/*ready*/case 4: {
+			List<Order>list;
+			list.readFileFlights("Flights.txt");
+			list.show_flights();
+			break;
+		}
+		case 0: {
+			flag = false;
+			break;
+		}
+		default: {
+			cout << "Такого варианта нет!" << endl;
+			break; }
+		}
+	}
+}
+void Users::edit_flight()
+{
+	List<Order>list;
+	list.readFileFlights("Flights.txt");
+	bool flag = true;
+	while (flag) {
+		cout << "Введите номер рейса, даты отправления/прибытия , которого вы хотите изменить : " << endl;
+		string temp_flight;
+		cin >> temp_flight;
+		list.edit_flight(temp_flight);
+		list.writeFileFlights("Flights.txt");
+		break;
+	}
+}
 void Users:: menu_admin() {
-	cout << "1 - Редактировать права пользователя !" << endl;
+	cout << "Здравствуйте, администратор !" << endl;
+	cout << "1 - Изменить права пользователя на admin " << endl;
 	cout << "2 - Изменить информацию о доступных рейсах " << endl;
 	cout << "3 - Сделать заказ " << endl;
-	cout << "4 - Посмотреть информацию о заказах " << endl;
+	cout << "4 - Посмотреть информацию о заказах " << endl;/*если проблема не решится, сделать и подтверждение статуса заказа*/
+	cout << "5 - Посмотреть информацию о пользователях " << endl;
 	cout << "0 - Выход " << endl;
 }
+void Users::edit_user_root()
+{
+	string login;
+	List<Users> list;
+	list.readFile("Users.txt");
+	cout << "Введите логин пользователя , права которого хотите изменить : ";
+	cin >> login;
+	list.edit_by_login(login);
+	list.writeFile("Users.txt");
+}
+
 void Users::menu_user() {
 	cout << "Здравствуйте , пользователь!" << endl;
 	cout << "1 - Посмотреть доступные рейсы " << endl;
@@ -313,35 +425,7 @@ void Users::userwork(string login)
 			break;
 		}
 		/*просмотр заказов*/case 3: {
-			int ch = 0;
-			bool fl = true;
-			while (fl == true) {
-				cout << "1 - Заказы эконом класса " << endl;
-				cout << "2 - Заказы бизнес класса " << endl;
-				cout << "0 - Назад " << endl;
-				check(ch);
-				switch (ch)
-				{
-				case 1: {
-					List <Order> list;
-					list.readFileEO("Econom_orders.txt");
-					list.show_orders_by_login(login);
-					break;
-				}
-				case 2: {
-					List <Order> list;
-					list.readFileBO("Business_orders.txt");
-					list.show_orders_by_login(login);
-					break;
-				}
-				case 0: {
-					fl = false;
-					break;
-				}
-				default:cout << "Такого варианта нет!" << endl;
-					break;
-				}
-			}
+			this->show_orders(login);
 			break; 
 		}
 		/*case 4: {
@@ -394,20 +478,29 @@ void Users::adminwork(string login)
 		check(choise);
 		switch (choise)
 		{
-		case 1: {
+		/*ready*/case 1: {
+			this->edit_user_root();
 			break;
 		}
 		case 2: {
+			this->edit_flights();
 			break;
 		}
-		case 3: {
+		/*ready*/case 3: {
 			this->make_order(login);
 			break;
 		}
-		case 4: {
+		/*TODO*/case 4: {
+			this->show_orders(login);
 			break;
 		}
-		case 0: {
+		/*ready*/case 5: {
+			List<Users>list;
+			list.readFile("Users.txt");
+			list.show_users();
+			break;
+		}
+		/*ready*/case 0: {
 			flag = false;
 			break;
 		}

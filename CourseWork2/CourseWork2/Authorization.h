@@ -18,6 +18,7 @@ inline void edintification() {
 		switch (choise) {
 		case 1: {
 			obj.authorization(flag);
+			break;
 		case 2: {
 			obj.registration(flag);
 			break;
