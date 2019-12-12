@@ -453,6 +453,6 @@ std::ofstream& operator<<(std::ofstream& out, const Order& obj)
 		<< obj.porthole << " "
 		<< obj.press << " "
 		<< obj.price << " "
-		<< obj.login << endl;
+		<< obj.login;
 	return out;
 }

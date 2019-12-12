@@ -1,6 +1,2 @@
-G432 Egypt Belarus Kair Grodno 22.12.19 23.12.19 sdfg dfg dfg dfg Econom Голова Нет Журналы 42 68 450$ g
-H123 Turkey Russia Ancara Moscva 22.12.19 23.12.19 sdfsd sdfsdf sdfsdf sdfsdf345 Econom Центр Есть Газеты 35 101 450$ g
-H123 Turkey Russia Ancara Moscva 22.12.19 23.12.19 dfgd dfgdf dfgdf dfgdf435 Econom Голова Нет Журналы 42 68 450$ beaver
-D390 China Belarus Shanhai Minsk 22.12.19 23.12.19 sdf sdf sdf 324sdgf Econom Голова Нет Журналы 42 68 450$ g
-G432 Egypt Belarus Kair Grodno 22.12.19 23.12.19 dfgdf dfgd dfgdfg dgd453 Econom Центр Нет Журналы 42 68 450$ g
-B345 Russia Belarus Moscva Grodno 22.12.19 23.12.19 dgdf dfgdfg dfgdfg dfgd453 Econom Центр Нет Журналы 38 104 450$ g
+G453 Bolgaria Belarus Sofia Minsk 22.12.19 23.12.19 dfdfg dfgd dfgdf dfgd345 Econom Центр Нет Журналы 7 26 450$ g
+D390 China Belarus Shanhai Minsk 22.12.19 23.12.19 fgdg dfgdf dfgdg dfgdg345 Econom Голова Нет Журналы 16 116 450$ g

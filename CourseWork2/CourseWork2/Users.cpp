@@ -401,7 +401,7 @@ void Users::menu_user() {
 	cout << "1 - Посмотреть доступные рейсы " << endl;
 	cout << "2 - Оформить заказ " << endl;
 	cout << "3 - Посмотреть ваши заказы " << endl;
-	//cout << "4 - Удалить ваш заказ " << endl;
+	cout << "4 - Удалить ваш заказ " << endl;
 	cout << "0 - Вернуться назад " << endl;
 }
 void Users::userwork(string login)
@@ -428,7 +428,7 @@ void Users::userwork(string login)
 			this->show_orders(login);
 			break; 
 		}
-		/*case 4: {
+		case 4: {
 			int ch = 0;
 			bool fl = true;
 			while (fl == true) {
@@ -457,7 +457,7 @@ void Users::userwork(string login)
 				}
 			}
 			break;
-		}*/
+		}
 		case 0: {
 			flag = false;
 			break;

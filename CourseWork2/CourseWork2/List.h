@@ -666,17 +666,22 @@ void List<Order>::writeFileEO(string fileName)
 	ofstream fout(fileName, ios::out);
 	Line<Order>* current = nullptr;
 	current = begin;
+	int i = 0;
 	while (current->next != NULL)
 	{
 		fout << current->obj;
+		i++;
 		current = current->next;
+		if (i < count - 1) {
+			fout << endl;
+		}
 	}
 	fout.close();
 }
 void List<Order>::writeEndFileEO(string fileName, Order &obj)
 {
 	ofstream fout(fileName, ios::app);
-	fout << obj.get_flight() << " "
+	fout <<endl<< obj.get_flight() << " "
 		<< obj.get_departs_contry() << " "
 		<< obj.get_arrive_contry() << " "
 		<< obj.get_departs_city() << " "
@@ -694,7 +699,7 @@ void List<Order>::writeEndFileEO(string fileName, Order &obj)
 		<< obj.get_number_of_ticket()<<" "
 		<<obj.get_number_of_place()<<" "
 		<< obj.get_price() << " "
-		<< obj.get_login() << endl;
+		<< obj.get_login();
 	fout.close();
 }
 inline List<Order>::~List()
@@ -818,7 +823,7 @@ inline void List<Order>::show_orders_by_login(string login)
 	Line<Order>* current = nullptr;
 	current = begin;
 	cout << "\t\tВаши заказы : " << endl;
-	while (current->next!=NULL)
+	while (current!=NULL)
 	{
 		if (current->obj.get_login() == login)
 		{
@@ -921,7 +926,7 @@ inline Line<Order>* List<Order>::operator[](int id)
 void List<Order>::writeEndFileBO(string filename, Order obj)
 {
 	ofstream fout(filename, ios::app);
-		fout << obj.get_flight() << " "
+		fout << endl<<obj.get_flight() << " "
 			<< obj.get_departs_contry() << " "
 			<< obj.get_arrive_contry() << " "
 			<< obj.get_departs_city() << " "
@@ -941,7 +946,7 @@ void List<Order>::writeEndFileBO(string filename, Order obj)
 			<< obj.get_number_of_ticket() << " "
 			<< obj.get_number_of_place() << " "
 			<< obj.get_price() << " "
-			<< obj.get_login() << endl;
+			<< obj.get_login();
 	fout.close();
 }
 inline void List<Order>::readFileBO(string filename)
@@ -979,6 +984,7 @@ inline void List<Order>::readFileBO(string filename)
 }
 inline void List<Order>::writeFileBO(string filename)
 {
+	int i = 0;
 	ofstream fout(filename, ios::out);
 	Line<Order>* current = nullptr;
 	current = end;
@@ -1004,7 +1010,11 @@ inline void List<Order>::writeFileBO(string filename)
 			<<current->obj.get_number_of_ticket()<<" "
 			<<current->obj.get_number_of_place()<<" "
 			<< current->obj.get_price() << " "
-			<< current->obj.get_login() << endl;
+			<< current->obj.get_login();
+		if (i < count - 1) {
+			fout << endl;
+		}
+		i++;
 		current = current->prev;
 	}
 	fout.close();
