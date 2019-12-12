@@ -99,6 +99,7 @@ public:
 	void writeFileBO(string); //запись данных в файл    
 	Line<Order>* operator [] (int);
 	void writeFileEO(string);
+	Order dellOne();
 	void writeEndFileBO(string,Order); //запись данных в файл    
 	void writeEndFileEO(string, Order &);
 	void writeEndFileFlights(string filename, Order obj);
@@ -561,6 +562,29 @@ inline List<Users>::~List()
 }
 
 /*for orders*/
+inline Order List<Order>::dellOne()
+{
+	if (end == begin)
+	{
+		count--;
+		Line<Order> data;
+		data.obj = end->obj;
+		delete end;
+		end = begin = NULL;
+		return data.obj;
+	}
+	else {
+		Line<Order>* current = nullptr;
+		count--;
+		Line<Order> data;
+		current = end->prev;
+		current->next = NULL;
+		data.obj = end->obj;
+		delete end;
+		end = current;
+		return data.obj;
+	}
+}
 inline List<Order>::List()
 {
 	count = 0;
@@ -595,29 +619,8 @@ inline void List<Order>::readFileEO(string fileName)
 {
 	ifstream fin(fileName, ios::in);
 	Order temp;
-	int i,j;
-	string t1,t2,t3,t4, t11, t12, t13, t14,t6,t16,t5,t15,t7,t8,t9,t10,t17;
 	while (!fin.eof()) {
-		fin >> t1>>t2>>t3>>t4>>t5>>t6>>t7>>t8>>t9>>t10>>t11>>t12>>t13>>t14>>t15>>i>>j>>t16>>t17;
-		temp.set_flight(t1);
-		temp.set_departs_contry(t2);
-		temp.set_arrive_contry(t3);
-		temp.set_departs_city(t4);
-		temp.set_arrival_city(t5);
-		temp.set_date_of_shipping(t6);
-		temp.set_date_of_arrival(t7);
-		temp.set_surname(t8);
-		temp.set_name(t9);
-		temp.set_patronimyc(t10);
-		temp.set_passport_number(t11);
-		temp.set_status(t12);
-		temp.set_location(t13);
-		temp.set_porthole(t14);
-		temp.set_press(t15);
-		temp.set_number_of_ticket(i);
-		temp.set_price(t16);
-		temp.set_login(t17);
-		temp.set_number_of_place(j);
+		fin >> temp;
 		this->push(temp);
 	}
 	fin.close();
@@ -667,12 +670,12 @@ void List<Order>::writeFileEO(string fileName)
 	Line<Order>* current = nullptr;
 	current = begin;
 	int i = 0;
-	while (current->next != NULL)
+	while (current != NULL)
 	{
 		fout << current->obj;
 		i++;
 		current = current->next;
-		if (i < count - 1) {
+		if (i < count) {
 			fout << endl;
 		}
 	}
@@ -697,9 +700,9 @@ void List<Order>::writeEndFileEO(string fileName, Order &obj)
 		<< obj.get_porthole() << " "
 		<< obj.get_press() << " "
 		<< obj.get_number_of_ticket()<<" "
-		<<obj.get_number_of_place()<<" "
 		<< obj.get_price() << " "
-		<< obj.get_login();
+		<< obj.get_login()<<" "
+		<< obj.get_number_of_place();
 	fout.close();
 }
 inline List<Order>::~List()
@@ -819,7 +822,7 @@ inline Order List<Order>::search_by_flight(string flight)
 }
 inline void List<Order>::show_orders_by_login(string login)
 {
-	int index = 0;
+	int index = 0,i=1;
 	Line<Order>* current = nullptr;
 	current = begin;
 	cout << "\t\tВаши заказы : " << endl;
@@ -827,6 +830,7 @@ inline void List<Order>::show_orders_by_login(string login)
 	{
 		if (current->obj.get_login() == login)
 		{
+			cout<<"\t\t" << "Заказ №" << i++ << endl;
 			current->obj.show_order_data();
 			index++;
 		}
@@ -839,40 +843,21 @@ inline void List<Order>::show_orders_by_login(string login)
 }
 inline int List<Order>::return_index_of_order(string flight,string login, int number_of_ticket)
 {
-	int index = 0;
+	int index = 1;
 	Line<Order>* current = nullptr;
 	current = begin;
-	while (current->next != NULL)
+	while (current != NULL)
 	{
-		if (current->obj.get_login() == login && current->obj.get_number_of_ticket()==number_of_ticket&&current->obj.get_flight()==flight)
-		{
+		if (current->obj.get_login() == login && current->obj.get_number_of_ticket() == number_of_ticket && current->obj.get_flight() == flight) {
 			return index;
 		}
-		current = current->next;
-		index++;
+		else {
+			index++;
+			current = current->next;
+		}
 	}
 	return -1;
 }
-//inline Order List<Order>::dell_by_ticketnumber_and_login(string login,int number_of_ticket ){
-	/*int index = 0;
-	Line<Order>* current = nullptr;
-	current = end;
-	while (current != NULL)
-	{
-		if (current->obj.get_login() == login && current->obj.get_number_of_ticket== number_of_ticket)
-		{
-			index++;
-			return current->obj;
-		}
-		else {
-			current = current->prev;
-		}
-	}
-	if (index == 0)
-	{
-		cout << "Нет заказа с такими параметрами!" << endl;
-	}
-}*/
 void List<Order>::writeFileFlights(string fileName)
 {
 	ofstream fout(fileName, ios::out);
@@ -888,39 +873,40 @@ void List<Order>::writeFileFlights(string fileName)
 			<< current->obj.get_arrival_city() << " "
 			<< current->obj.get_date_of_shipping() << " "
 			<< current->obj.get_date_of_arrival();
-		if (i < count - 1) {
+		i++;
+		if (i < count) {
 			fout << endl;
 		}
 		current = current->next;
-		i++;
 	}
 	fout.close();
 }
 void List<Order>::show_flights()
 {
+	int i = 1;
 	Line<Order>* current = nullptr;
 	current = begin;
 	cout << "Доступные рейсы : " << endl;
-	current->obj.show_flight();
-	while (current->next != NULL)
+	while (current!= NULL)
 	{
-		current = current->next;
+		cout << "\t\tРейс №" << i++ << endl;
 		current->obj.show_flight();
+		current = current->next;
 	}
 }
 inline Line<Order>* List<Order>::operator[](int id)
 {
 	Line<Order>* current = nullptr;
-	current = end;
+	current = begin;
 	int index = 1;
-	while (id != index)
+	do
 	{
-		if (current->prev != NULL)
+		if (current->next != NULL)
 		{
-			current = current->prev;
+			current = current->next;
 		}
 		index++;
-	}
+	} while (index != id);
 	return current;
 }
 void List<Order>::writeEndFileBO(string filename, Order obj)
@@ -974,10 +960,10 @@ inline void List<Order>::readFileBO(string filename)
 		temp.set_tv(t15);
 		temp.set_food(t18);
 		temp.set_air_conditioning(t19);
-		temp.set_number_of_ticket(i);
+		temp.set_number_of_place(j);
 		temp.set_price(t16);
 		temp.set_login(t17);
-		temp.set_number_of_place(j);
+		temp.set_number_of_ticket(i);
 		this->push(temp);
 	}
 	fin.close();
@@ -987,8 +973,8 @@ inline void List<Order>::writeFileBO(string filename)
 	int i = 0;
 	ofstream fout(filename, ios::out);
 	Line<Order>* current = nullptr;
-	current = end;
-	while (current->next != NULL)
+	current = begin;
+	while (current != NULL)
 	{
 		fout << current->obj.get_flight() << " "
 			<< current->obj.get_departs_contry() << " "
@@ -1011,11 +997,11 @@ inline void List<Order>::writeFileBO(string filename)
 			<<current->obj.get_number_of_place()<<" "
 			<< current->obj.get_price() << " "
 			<< current->obj.get_login();
-		if (i < count - 1) {
+		i++;
+		if (i < count) {
 			fout << endl;
 		}
-		i++;
-		current = current->prev;
+		current = current->next;
 	}
 	fout.close();
 }

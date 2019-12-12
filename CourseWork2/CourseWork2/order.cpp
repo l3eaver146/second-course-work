@@ -405,6 +405,7 @@ void Order::show_order_data() {
 	cout << "Отправляется из страны : " << get_departs_contry() << endl;
 	cout << "Прибывает в страну : " << get_arrive_contry() << endl;
 	cout << "Дата отправления : " << get_date_of_shipping() << endl;
+	cout << "Дата прибытия : " << get_date_of_arrival() << endl;
 	cout << "_____________________________________________________" << endl;
 }
 Order::~Order()
@@ -452,7 +453,9 @@ std::ofstream& operator<<(std::ofstream& out, const Order& obj)
 		<< obj.location << " "
 		<< obj.porthole << " "
 		<< obj.press << " "
+		<< obj.number_of_ticket << " "
 		<< obj.price << " "
-		<< obj.login;
+		<< obj.login << " "
+		<< obj.number_of_place;
 	return out;
 }

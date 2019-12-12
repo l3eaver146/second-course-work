@@ -1,2 +1,4 @@
-G453 Bolgaria Belarus Sofia Minsk 22.12.19 23.12.19 dfdfg dfgd dfgdf dfgd345 Econom Центр Нет Журналы 7 26 450$ g
-D390 China Belarus Shanhai Minsk 22.12.19 23.12.19 fgdg dfgdf dfgdg dfgdg345 Econom Голова Нет Журналы 16 116 450$ g
+D390 Egypt Belarus Kair Grodno 23.12.19 23.12.19 dfgdfg dfgdfg dfgdfg dfg435 Econom Центр Есть Журналы 32 450$ g 43
+B123 Egypt Belarus Kair Grodno 23.12.19 23.12.19 dfgdfg dfgdfg dfgdfg dfg435 Econom Центр Есть Журналы 32 450$ g 43
+S903 Egypt Belarus Kair Grodno 23.12.19 23.12.19 dfgdfg dfgdfg dfgdfg dfg435 Econom Центр Есть Журналы 32 450$ g 43
+L565 Belarus Russia Minsk Moscov 21.12.19 23.12.19 wertw werwe werwer436 wefw436475 Econom Голова Есть Журналы 10 450$ g 184

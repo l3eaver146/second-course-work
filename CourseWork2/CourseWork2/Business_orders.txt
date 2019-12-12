@@ -1,2 +1,2 @@
-H123 Turkey Russia Ancara Moscva 22.12.19 23.12.19 sdfd sdfsd sdfsd sdfsd Business Есть Бармен Есть 3 Есть 42 8 1000$ g
-H123 Turkey Russia Ancara Moscva 22.12.19 23.12.19 dfdf dfgdfg dfgdf43 dfgdf43 Business Есть Бармен Есть 3 Есть 36 7 1000$ g
+S903 Belarus USA Minsk Vashington 22.12.19 23.12.19 sdfsdswd sdfswerdf sdf2534sdf sfsd4423 Business Есть Стюардесса Есть 3 Есть 11 11 1000$ admin
+D390 China Belarus Shanhai Minsk 22.12.19 23.12.19 sdfssddd sdfewrsdf sdfsd46f sfsd4443 Business Есть Стюардесса Есть 3 Есть 12 12 1000$ admin

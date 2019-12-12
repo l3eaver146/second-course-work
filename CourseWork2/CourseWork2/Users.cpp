@@ -102,53 +102,59 @@ void Users::enter_password()
 void Users::dell_EO(string login)
 {
 	bool flag = true;
-	while (flag == true) {
+	int i = 0;
 		List <Order> list;
 		list.readFileEO("Econom_orders.txt");
 		list.show_orders_by_login(login);
-		cout << "Введите номер вашего билета : ";
-		int number_of_ticket;
-		check(number_of_ticket);
-		string flight;
-		cout << "Введите номер рейса : ";
-		cin >> flight;
-		int i = list.return_index_of_order(flight, login, number_of_ticket);
-		if (i==-1) {
-			cout << "Такого заказа не сущствует!" << endl;
-			cout << "Повторите попытку ввода : " << endl;
-		}
-		else {
+		/*do {
+			cout << "Введите номер вашего билета : ";
+			int number_of_ticket;
+			check(number_of_ticket);
+			string flight;
+			cout << "Введите номер рейса : ";
+			cin >> flight;
+			i = list.return_index_of_order(flight, login, number_of_ticket);
+			if (i == -1) {
+				cout << "Такого заказа не существует!" << endl;
+				cout << "Повторите попытку ввода : " << endl;
+			}
+		} while (!(i>=0));*/
+		cout << "Введите номер заказа, который хотите отменить : ";
+		check(i);
+		switch (i)
+		{
+		case 1: list.dellOne();
+			cout << "Ваш заказ успешно отменен!" << endl;
+			break;
+		default:
 			list.dellPoint(list[i]);
-			flag = false;
+			cout << "Ваш заказ успешно отменен!" << endl;
+			break;
 		}
 		list.writeFileEO("Econom_orders.txt");
 	}
-}
+
 
 void Users::dell_BO(string login)
 {
 	bool flag = true;
-	while (flag == true) {
-		List <Order> list;
-		list.readFileBO("Econom_orders.txt");
-		list.show_orders_by_login(login);
-		cout << "Введите номер вашего билета : ";
-		int number_of_ticket;
-		check(number_of_ticket);
-		string flight;
-		cout << "Введите номер рейса : ";
-		cin >> flight;
-		int i = list.return_index_of_order(flight, login, number_of_ticket);
-		if (i == -1) {
-			cout << "Такого заказа не сущствует!" << endl;
-			cout << "Повторите попытку ввода : " << endl;
-		}
-		else {
-			list.dellPoint(list[i]);
-			flag = false;
-		}
-		list.writeFileBO("Econom_orders.txt");
+	int i = 0;
+	List <Order> list;
+	list.readFileBO("Business_orders.txt");
+	list.show_orders_by_login(login);
+	cout << "Введите номер заказа, который хотите отменить : ";
+	check(i);
+	switch (i)
+	{
+	case 1: list.dellOne();
+		cout << "Ваш заказ успешно отменен!" << endl;
+		break;
+	default:
+		cout << "Ваш заказ успешно отменен!" << endl;
+		list.dellPoint(list[i]);
+		break;
 	}
+	list.writeFileBO("Business_orders.txt");
 }
 
 void Users::show_data_users()
@@ -339,7 +345,15 @@ void Users::edit_flights()
 			break;
 		}
 		case 2: {
-
+			int i = 0;
+			List<Order>list_of_flights;
+			list_of_flights.readFileFlights("Flights.txt");
+			list_of_flights.show_flights();
+			cout << "Введите номер рейса , который хотите удалить : ";
+			check(i);
+			list_of_flights.dellPoint(list_of_flights[i]);
+			list_of_flights.writeFileFlights("Flights.txt");
+			cout << "Рейс успешно удален : " << endl;
 			break;
 		}
 		case 3: {
