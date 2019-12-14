@@ -10,6 +10,7 @@ protected:
 public:
 	Users() {}
 	~Users(){}
+	void show();
 	Users(string login, string password, string root);
 	void set_login(string);
 	void set_password(string);

@@ -87,6 +87,7 @@ private:
 	int count; //количество элементов
 public:
 	void show_flights();
+	void show_all_orders();
 	List(); //конструктор без параметров
 	void push(const Order&); //добавить элемент в начало
 	void pushBack(const Order&); //добавить элемент в конец
@@ -104,7 +105,7 @@ public:
 	void writeEndFileEO(string, Order &);
 	void writeEndFileFlights(string filename, Order obj);
 	void edit_flight(string);
-	Order search_by_flight(string);
+	Order search_by_flight(string,bool&);
 	void show_orders_by_login(string);
 	int return_index_of_order(string flight,string login,int number_of_ticket );
 	//Order dell_by_ticketnumber_and_login(string login,int);
@@ -761,13 +762,18 @@ inline void List<Order>::edit_flight(string flight)
 			int cho = 0;
 			while (flag) {
 				cout << "Что вы хотите изменить?" << endl;
-				cout << "1 - Дату отправления " << endl;
-				cout << "2 - Дату прибытия " << endl;
-				cout << "0 - Назад " << endl;
+				cout << "------------------------------" << endl;
+				cout << "| 1 |      Дату отправления   | " << endl;
+				cout << "------------------------------" << endl;
+				cout << "| 2 |       Дату прибытия     |" << endl;
+				cout << "------------------------------" << endl;
+				cout << "| 0 |           Назад         | " << endl;
+				cout << "------------------------------" << endl;
 				check(cho);
 				switch (cho)
 				{
 				case 1: {
+					system("cls");
 					string temp;
 					cout << "Введите новую дату отправления : ";
 					cin >> temp;
@@ -775,6 +781,7 @@ inline void List<Order>::edit_flight(string flight)
 					break;
 				}
 				case 2: {
+					system("cls");
 					string temp;
 					cout << "Введите новую дату прибытия : ";
 					cin >> temp;
@@ -799,7 +806,7 @@ inline void List<Order>::edit_flight(string flight)
 		cout << "Нет рейса с таким номером!" << endl;
 	}
 }
-inline Order List<Order>::search_by_flight(string flight)
+inline Order List<Order>::search_by_flight(string flight,bool &flag)
 {
 	int index = 0;
 	Line<Order>* current = nullptr;
@@ -809,6 +816,7 @@ inline Order List<Order>::search_by_flight(string flight)
 		if (current->obj.get_flight() == flight)
 		{
 			index++;
+			flag = false;
 			return current->obj;
 		}
 		else {
@@ -818,27 +826,31 @@ inline Order List<Order>::search_by_flight(string flight)
 	if (index == 0)
 	{
 		cout << "Нет рейса с таким номером!" << endl;
+		Sleep(1000);
+		system("cls");
 	}
+	Order obj;
+	return obj;
 }
 inline void List<Order>::show_orders_by_login(string login)
 {
 	int index = 0,i=1;
 	Line<Order>* current = nullptr;
 	current = begin;
-	cout << "\t\tВаши заказы : " << endl;
 	while (current!=NULL)
 	{
 		if (current->obj.get_login() == login)
 		{
 			cout<<"\t\t" << "Заказ №" << i++ << endl;
 			current->obj.show_order_data();
+			current->obj.show_full_data();
 			index++;
 		}
 		current = current->next;
 	}
 	if (index == 0)
 	{
-		cout << "У вас нет заказов ! " << endl;
+		cout << "Список заказов пуст ! " << endl;
 	}
 }
 inline int List<Order>::return_index_of_order(string flight,string login, int number_of_ticket)
@@ -893,6 +905,25 @@ void List<Order>::show_flights()
 		current->obj.show_flight();
 		current = current->next;
 	}
+}
+inline void List<Order>::show_all_orders()
+{
+	int index = 0, i = 1;
+	Line<Order>* current = nullptr;
+	current = begin;
+	while (current != NULL)
+	{
+			cout << "\t\t\t\t\t" << "Заказ №" << i++ << endl;
+			current->obj.show_admin();
+			current->obj.show_full_data();
+			index++;
+		current = current->next;
+	}
+	if (index == 0)
+	{
+		cout << "Список заказов пуст ! " << endl;
+	}
+
 }
 inline Line<Order>* List<Order>::operator[](int id)
 {

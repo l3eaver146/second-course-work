@@ -1,6 +1,7 @@
 #include "Users.h"
 #include "Protect.h"
 #include "List.h"
+
 Users::Users(string login, string password, string root)
 {
 	this->set_login(login);
@@ -42,9 +43,13 @@ void Users::make_order(string login) {
 	Order obj;
 	bool exit = true;
 	while (exit) {
-		cout << "1 - Заказать билет бизнесс класса " << endl;
-		cout << "2 - Заказать билет эконом класса " << endl;
-		cout << "0 - Назад" << endl;
+		cout << "\t\t\t---------------------------------------" << endl;
+		cout << "\t\t\t| 1 |  Заказать билет бизнесс класса  |" << endl;
+		cout << "\t\t\t---------------------------------------" << endl;
+		cout << "\t\t\t| 2 |  Заказать билет эконом класса   |" << endl;
+		cout << "\t\t\t---------------------------------------" << endl;
+		cout << "\t\t\t| 0 |              Назад              |" << endl;
+		cout << "\t\t\t---------------------------------------" << endl;
 		int cho = 0;
 		check(cho);
 		switch (cho)
@@ -105,6 +110,7 @@ void Users::dell_EO(string login)
 	int i = 0;
 		List <Order> list;
 		list.readFileEO("Econom_orders.txt");
+		cout << "\t\t\t Ваши заказы : " << endl;
 		list.show_orders_by_login(login);
 		/*do {
 			cout << "Введите номер вашего билета : ";
@@ -142,6 +148,7 @@ void Users::dell_BO(string login)
 	List <Order> list;
 	list.readFileBO("Business_orders.txt");
 	list.show_orders_by_login(login);
+	cout << "\t\t\t Ваши заказы : " << endl;
 	cout << "Введите номер заказа, который хотите отменить : ";
 	check(i);
 	switch (i)
@@ -173,11 +180,11 @@ std::ifstream& operator>>(std::ifstream& in, Users& Users)
 std::ostream& operator<<(std::ostream& out, const Users& Users)
 {
 	out << endl;
-	out << "__________________________________________" << endl;
-	out << "Информация о пользователе : " << endl;
-	out << "login : " << Users.login << endl;
-	out<< "root : "<<Users.root << endl;
-	out << "__________________________________________" << endl;
+	out << "\t\t\t__________________________________________" << endl;
+	out << "\t\t\tИнформация о пользователе : " << endl;
+	out << "\t\t\tlogin : " << Users.login << endl;
+	out<< "\t\t\troot : "<<Users.root << endl;
+	out << "\t\t\t__________________________________________" << endl;
 	return out;
 }
 
@@ -215,12 +222,13 @@ void Users::authorization(bool& flag)
 			this->set_login(temp_obj.get_login());
 			this->set_password(temp_obj.get_password());
 			this->set_root(temp_obj.get_root());
-			flag = false;
 			flag_exit_authorization = false;
 			system("cls");
 		}
 		else {
 			cout << endl << "Повторите попытку авторизации!\nВведенные вами данные неверны!\n";
+			Sleep(3000);
+			system("cls");
 		}
 	}
 	if (this->get_root() == "admin") {
@@ -234,25 +242,32 @@ void Users::show_orders(string login) {
 	int ch = 0;
 	bool fl = true;
 	while (fl == true) {
-		cout << "1 - Заказы эконом класса " << endl;
-		cout << "2 - Заказы бизнес класса " << endl;
-		cout << "0 - Назад " << endl;
+		cout << "\t\t\t-------------------------------" << endl;
+		cout << "\t\t\t| 1 |	 Заказы эконом класса |" << endl;
+		cout << "\t\t\t-------------------------------" << endl;
+		cout << "\t\t\t| 2 |	 Заказы бизнес класса | " << endl;
+		cout << "\t\t\t-------------------------------" << endl;
+		cout << "\t\t\t| 0 |           Назад         | " << endl;
+		cout << "\t\t\t-------------------------------" << endl;
 		check(ch);
 		switch (ch)
 		{
 		case 1: {
+			system("cls");
 			List <Order> list;
 			list.readFileEO("Econom_orders.txt");
 			list.show_orders_by_login(login);
 			break;
 		}
 		case 2: {
+			system("cls");
 			List <Order> list;
 			list.readFileBO("Business_orders.txt");
 			list.show_orders_by_login(login);
 			break;
 		}
 		case 0: {
+			system("cls");
 			fl = false;
 			break;
 		}
@@ -263,14 +278,15 @@ void Users::show_orders(string login) {
 }
 void Users::registration(bool& flag)
 {
+	system("cls");
 	List<Users> list_of_users;
 	string File_of_users = "Users.txt";
 	list_of_users.readFile(File_of_users);
 	Users temp;
 	bool flag_exit_registration = true;
-	cout << "Добро пожаловать в раздел регистрации пользователей! " << endl;
+	cout << "\t\t\tДобро пожаловать в раздел регистрации пользователей! " << endl;
 	while (flag_exit_registration == true) {
-		cout << "введите ваш логин : ";
+		cout << "Введите ваш логин : ";
 		cin >> temp.login;
 		bool res = list_of_users.check_on_copy(temp.get_login());
 		if (res == true) {
@@ -282,11 +298,13 @@ void Users::registration(bool& flag)
 			this->set_login(temp.get_login());
 			this->set_password(temp.get_password());
 			this->set_root("user");
-			flag = false;
 			flag_exit_registration = false;
 		}
 		else {
 			cout << "Ваш логин не униклен! Повторите попытку ввода ! ";
+			Sleep(2000);
+			system("cls");
+		
 		}
 	}
 	this->userwork(this->get_login());
@@ -294,12 +312,16 @@ void Users::registration(bool& flag)
 
 void Users::make_bo(string login)
 {
+	Order obj;
+	bool flag = true;
 	List<Order>list;
 	list.readFileFlights("Flights.txt");
 	string temp_flight;
-	cout << "Введите номер желаемого рейса :";
-	cin >> temp_flight;
-	Order obj = list.search_by_flight(temp_flight);
+	while (flag) {
+		cout <<endl<<"Введите номер желаемого рейса : ";
+		cin >> temp_flight;
+		obj = list.search_by_flight(temp_flight, flag);
+	}
 	/*((Passenger_data)obj).set_all();
 	((Air_ticket)obj).set_all();
 	((Econom_class)obj).set_all();*/
@@ -310,12 +332,16 @@ void Users::make_bo(string login)
 
 void Users::make_eo(string login)
 {
+	bool flag=true;
 	List<Order>list;
+	Order obj;
 	list.readFileFlights("Flights.txt");
 	string temp_flight;
-	cout << "Введите номер желаемого рейса :";
-	cin >> temp_flight;
-	Order obj = list.search_by_flight(temp_flight);
+	while (flag) {
+		cout << "Введите номер желаемого рейса :";
+		cin >> temp_flight;
+		obj = list.search_by_flight(temp_flight,flag);
+	}
 	/*((Passenger_data)obj).set_all();
 	((Air_ticket)obj).set_all();
 	((Econom_class)obj).set_all();*/
@@ -329,15 +355,24 @@ void Users::edit_flights()
 	while (flag) {
 		int choise = 0;
 		cout << "Выберите , как именно вы хотите измненить файл рейсов :" << endl;
-		cout << "1 - Добавить рейс " << endl;
-		cout << "2 - Удалить рейс " << endl;
-		cout << "3 - Редактировать рейс " << endl;
-		cout << "4 - Информация о всех рейсах " << endl;
-		cout << "0 - Назад" << endl;
+		cout << "\t\t\t-------------------------------------"<<endl;
+		cout << "\t\t\t| 1 |      Добавить рейс            |"<< endl;
+		cout << "\t\t\t-------------------------------------" << endl;
+		cout << "\t\t\t| 2 |      Удалить рейс             |" << endl;
+		cout << "\t\t\t-------------------------------------" << endl;
+		cout << "\t\t\t| 3 |   Редактировать рейс          |" << endl;
+		cout << "\t\t\t-------------------------------------" << endl;
+		cout << "\t\t\t| 4 | Информация о всех рейсах      |" << endl;
+		cout << "\t\t\t-------------------------------------" << endl;
+		cout << "\t\t\t| 0 |           Назад               |" << endl;
+		cout << "\t\t\t-------------------------------------" << endl;
+		
+		cout << "Ваш выбор : ";
 		check(choise);
 		switch (choise)
 		{
 		/*ready*/case 1: {
+			system("cls");
 			List<Order>list_of_flights;
 			Order flight;
 			flight.set_data_flight();
@@ -345,6 +380,7 @@ void Users::edit_flights()
 			break;
 		}
 		case 2: {
+			system("cls");
 			int i = 0;
 			List<Order>list_of_flights;
 			list_of_flights.readFileFlights("Flights.txt");
@@ -357,16 +393,19 @@ void Users::edit_flights()
 			break;
 		}
 		case 3: {
+			system("cls");
 			this->edit_flight();
 			break;
 		}
 		/*ready*/case 4: {
+			system("cls");
 			List<Order>list;
 			list.readFileFlights("Flights.txt");
 			list.show_flights();
 			break;
 		}
 		case 0: {
+			system("cls");
 			flag = false;
 			break;
 		}
@@ -391,13 +430,20 @@ void Users::edit_flight()
 	}
 }
 void Users:: menu_admin() {
-	cout << "Здравствуйте, администратор !" << endl;
-	cout << "1 - Изменить права пользователя на admin " << endl;
-	cout << "2 - Изменить информацию о доступных рейсах " << endl;
-	cout << "3 - Сделать заказ " << endl;
-	cout << "4 - Посмотреть информацию о заказах " << endl;/*если проблема не решится, сделать и подтверждение статуса заказа*/
-	cout << "5 - Посмотреть информацию о пользователях " << endl;
-	cout << "0 - Выход " << endl;
+	system("color 03");
+	cout << endl << endl;
+	cout << "\t\t\t\tЗдравствуйте, администратор !" << endl;
+	cout << "\t\t\t------------------------------------------------" << endl;
+	cout << "\t\t\t| 1 |   Изменить права пользователя на admin   |" << endl;
+	cout << "\t\t\t-----------------------------------------------" << endl;
+	cout << "\t\t\t| 2 |  Изменить информацию о доступных рейсах  |" << endl;
+	cout << "\t\t\t------------------------------------------------" << endl;
+	cout << "\t\t\t| 3 |	 Посмотреть информацию о заказах       |" << endl;
+	cout << "\t\t\t------------------------------------------------" << endl;/*если проблема не решится, сделать и подтверждение статуса заказа*/
+	cout << "\t\t\t| 4 |  Посмотреть информацию о пользователях   |" << endl;
+	cout << "\t\t\t------------------------------------------------" << endl;
+	cout << "\t\t\t| 0 |                  Назад                   |" << endl;
+	cout << "\t\t\t------------------------------------------------" << endl;
 }
 void Users::edit_user_root()
 {
@@ -411,12 +457,20 @@ void Users::edit_user_root()
 }
 
 void Users::menu_user() {
-	cout << "Здравствуйте , пользователь!" << endl;
-	cout << "1 - Посмотреть доступные рейсы " << endl;
-	cout << "2 - Оформить заказ " << endl;
-	cout << "3 - Посмотреть ваши заказы " << endl;
-	cout << "4 - Удалить ваш заказ " << endl;
-	cout << "0 - Вернуться назад " << endl;
+	system("color 04");
+	system("cls");
+	cout << "\t\t\tЗдравствуйте , пользователь!" << endl;
+	cout << "\t\t\t----------------------------------" << endl;
+	cout << "\t\t\t| 1 | Посмотреть доступные рейсы |" << endl;
+	cout << "\t\t\t----------------------------------" << endl;
+	cout << "\t\t\t| 2 |       Оформить заказ       |" << endl;
+	cout << "\t\t\t----------------------------------" << endl;
+	cout << "\t\t\t| 3 |    Посмотреть ваши заказы  |" << endl;
+	cout << "\t\t\t----------------------------------" << endl;
+	cout << "\t\t\t| 4 |      Отменить ваш заказ    |" << endl;
+	cout << "\t\t\t----------------------------------" << endl;
+	cout << "\t\t\t| 0 |       Вернуться назад      |" << endl;
+	cout << "\t\t\t----------------------------------" << endl;
 }
 void Users::userwork(string login)
 {
@@ -432,23 +486,32 @@ void Users::userwork(string login)
 			List<Order>list;
 			list.readFileFlights("Flights.txt");
 			list.show_flights();
+			Sleep(10000);
 			break;
 		}
 		/*создание заказа*/case 2: {
+			system("cls");
 			this->make_order(login);
 			break;
 		}
 		/*просмотр заказов*/case 3: {
+			system("cls");
+			cout << "\t\t\t Ваши заказы : " << endl;
 			this->show_orders(login);
 			break; 
 		}
 		case 4: {
+			system("cls");
 			int ch = 0;
 			bool fl = true;
 			while (fl == true) {
-				cout << "1 - Заказы эконом класса " << endl;
-				cout << "2 - Заказы бизнес класса " << endl;
-				cout << "0 - Назад " << endl;
+				cout << "\t\t\t--------------------------------" << endl;
+				cout << "\t\t\t| 1 |   Заказы эконом класса   |" << endl;
+				cout << "\t\t\t--------------------------------" << endl;
+				cout << "\t\t\t| 2 |   Заказы бизнес класса   |" << endl;
+				cout << "\t\t\t--------------------------------" << endl;
+				cout << "\t\t\t| 0 |        Назад             | " << endl;
+				cout << "\t\t\t--------------------------------" << endl;
 				check(ch);
 				switch (ch)
 				{
@@ -482,36 +545,85 @@ void Users::userwork(string login)
 		}
 	}
 }
-
+void Users::show()
+{
+	system("cls");
+	List <Order> list;
+	list.readFileEO("Econom_orders.txt");
+	cout <<endl<< "\t\t\t\t   Заказы эконом класса : " << endl;
+	cout << endl;
+	list.show_all_orders();
+	Sleep(2000);
+	List <Order> list1;
+	list1.readFileBO("Business_orders.txt");
+	cout << "\t\t\t\t   Заказы бизнес класса : " << endl;
+	cout << endl;
+	list1.show_all_orders();
+}
 void Users::adminwork(string login)
 {
 	int choise = 0;
 	bool flag = true;
 	while (flag) {
+		system("cls");
 		this->menu_admin();
 		check(choise);
 		switch (choise)
 		{
 		/*ready*/case 1: {
 			this->edit_user_root();
+			system("cls");
 			break;
 		}
 		case 2: {
 			this->edit_flights();
 			break;
 		}
-		/*ready*/case 3: {
-			this->make_order(login);
+		/*TODO*/case 3: {
+			system("cls");
+			bool fl1 = true;
+			int cho = 0;
+			while (fl1) {
+				cout << "\t\t\tКакие именно заказы вы хотите просмотреть ?" << endl;
+				cout << "---------------------------------------" << endl;
+				cout << "| 1 |           Все заказы            |" << endl;
+				cout << "---------------------------------------" << endl;
+				cout << "| 2 | Заказы конкретного пользователя |" << endl;
+				cout << "---------------------------------------" << endl;
+				cout << "| 0 |             Назад               |" << endl;
+				cout << "---------------------------------------" << endl;
+				check(cho);
+				switch (cho)
+				{
+				case 1: {
+					system("cls");
+					this->show();
+					break; 
+				}
+				case 2: {
+					system("cls");
+					string _temp;
+					cout << "Введие логин пользователя, заказы которого вы хотите посмотреть : ";
+					cin >> _temp;
+					cout << "Заказы пользователя  " << _temp << " : " << endl;
+					this->show_orders(_temp);
+					break; 
+				}
+				case 0 :
+					system("cls");
+					fl1 = false;
+					break;
+				default: cout << "Нет такого варианта! " << endl;
+					break;
+				}
+			}
 			break;
 		}
-		/*TODO*/case 4: {
-			this->show_orders(login);
-			break;
-		}
-		/*ready*/case 5: {
+		/*ready*/case 4: {
 			List<Users>list;
 			list.readFile("Users.txt");
 			list.show_users();
+			Sleep(10000);
 			break;
 		}
 		/*ready*/case 0: {

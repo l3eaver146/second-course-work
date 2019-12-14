@@ -1,3 +1,2 @@
 ﻿  Users.cpp
-C:\Users\Gigabyte\second-course-work\CourseWork2\CourseWork2\List.h(822): warning C4715:  List<Order>::search_by_flight: значение возвращается не при всех путях выполнения
-  CourseWork2.vcxproj -> C:\Users\Gigabyte\second-course-work\CourseWork2\Debug\CourseWork2.exe
+  CourseWork2.vcxproj -> E:\Git\second-course-work\CourseWork2\Debug\CourseWork2.exe

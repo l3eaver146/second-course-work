@@ -1,6 +1,6 @@
 uree aaaaaaaa admin
 beaver 29092000 user
-g g user
+g g admin
 l3llFF 78426345 admin
 vector 29092000 admin
 user user2341234 admin

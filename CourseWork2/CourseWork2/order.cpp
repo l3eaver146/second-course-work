@@ -136,7 +136,33 @@ void Order::show_flight()
 	cout << "Дата прибытия : " << this->get_date_of_arrival() << endl;
 	cout << "________________________________________________________________" << endl;
 }
-
+void Order::show_full_data() {
+	string flag1=this->get_air_conditioning();
+	if (flag1.length()==0) {
+		cout << "\t\t\tПодробная информация о заказе : " << endl << endl;
+		cout << "\t\t\t1.Информация о пассажире " << endl;
+		cout << "\t\t\tФИО : " << this->get_surname() << " " << this->get_name() << " " << this->get_patronimyc() << endl;
+		cout << "\t\t\tНомер паспорта : " << this->get_passport_number() << endl;
+		cout << endl<<"\t\t\t2.Информация об особенностях класса " << endl;
+		cout << "\t\t\tЧасть самолета, в которой находится место : " << this->get_location() << endl;
+		cout << "\t\t\tЛитература, предоставляемая компанией : " << this->get_press() << endl;
+		cout << "\t\t\tНаличие иллюминатора у места : " << this->get_porthole() << endl;
+		cout << endl << endl;
+	}
+	else {
+		cout << "\t\t\tПодробная информация о заказе : " << endl << endl;
+		cout << "\t\t\t1.Информация о пассажире " << endl;
+		cout << "\t\t\tФИО : " << this->get_surname() << " " << this->get_name() << " " << this->get_patronimyc() << endl;
+		cout << "\t\t\tНомер паспорта : " << this->get_passport_number() << endl;
+		cout <<endl<<"\t\t\t2.Информация об особенностях класса " << endl;
+		cout << "\t\t\tНаличие бара : " << this->get_bar() << endl;
+		cout << "\t\t\tНаличие кондиционера : " << this->get_air_conditioning() << endl;
+		cout << "\t\t\tЧисло оплачиваемых приемов пищи : " << this->get_food() << endl;
+		cout << "\t\t\tОбслуживающий персонал : " << this->get_staff() << endl;
+		cout << "\t\t\tНаличие телевизора : " << this->get_tv() << endl;
+		cout << endl << endl;
+	}
+}
 Order& Order::operator=(const Order& other)
 {
 	this->arrive_contry = other.arrive_contry;
@@ -395,18 +421,26 @@ void Order::set_data_bo() {
 	this->set_price("1000$");
 	this->set_status("Business");
 }
+void Order::show_admin() {
+	cout << endl << endl << "\t\t\t\t***  Заказал пользователь " << this->get_login() << "  ***" << endl;
+	this->show_order_data();
+}
 void Order::show_order_data() {
-	cout << "_____________________________________________________" << endl;
-	cout << "Номер вашего билета : " << this->get_number_of_ticket() << endl;
-	cout << "Номер вашего места : " << this->get_number_of_place() << endl;
-	cout << "Номер рейса : " << this->get_flight() << endl;
-	cout << "Цена вашего билета : " << this->get_price() << endl;
-	cout << "Ваш билет " << get_status() << " класса " << endl;
-	cout << "Отправляется из страны : " << get_departs_contry() << endl;
-	cout << "Прибывает в страну : " << get_arrive_contry() << endl;
-	cout << "Дата отправления : " << get_date_of_shipping() << endl;
-	cout << "Дата прибытия : " << get_date_of_arrival() << endl;
-	cout << "_____________________________________________________" << endl;
+	cout << endl;
+	cout << endl;
+	cout << "\t\t\t_____________________________________________________" << endl;
+	cout << "\t\t\tНомер вашего билета : " << this->get_number_of_ticket() << endl;
+	cout << "\t\t\tНомер вашего места : " << this->get_number_of_place() << endl;
+	cout << "\t\t\tНомер рейса : " << this->get_flight() << endl;
+	cout << "\t\t\tЦена вашего билета : " << this->get_price() << endl;
+	cout << "\t\t\tВаш билет " << get_status() << " класса " << endl;
+	cout << "\t\t\tОтправляется из страны : " << get_departs_contry() << endl;
+	cout << "\t\t\tПрибывает в страну : " << get_arrive_contry() << endl;
+	cout << "\t\t\tДата отправления : " << get_date_of_shipping() << endl;
+	cout << "\t\t\tДата прибытия : " << get_date_of_arrival() << endl;
+	cout << "\t\t\t_____________________________________________________" << endl;
+	cout << endl;
+	cout << endl;
 }
 Order::~Order()
 {
